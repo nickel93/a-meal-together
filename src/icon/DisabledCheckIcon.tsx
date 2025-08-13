@@ -5,6 +5,7 @@ const DisabledCheckIcon = () => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
+      fill="none"
     >
       <rect width="24" height="24" rx="12" fill="#D1D5DC" />
       <path

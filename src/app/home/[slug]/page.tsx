@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { HomeJoin, HomeSchedule, HomeStory } from "@/widgets/home";
+import { HomeHeader, HomeJoin, HomeSchedule, HomeStory } from "@/widgets/home";
 
 type Slug = "story" | "schedule" | "join";
 
@@ -28,7 +28,10 @@ export default async function Page({
   if (!Component) notFound();
 
   return (
-    <div className="bg-[#F8F6F5] px-[20px] h-full pt-[54px] gap-[40px] flex flex-col">
+    <div className="px-[20px] h-full pt-[54px] gap-[40px] flex flex-col">
+      {(slug === "join" || slug === "story") && (
+        <HomeHeader>가치한상</HomeHeader>
+      )}
       <Component />
     </div>
   );
