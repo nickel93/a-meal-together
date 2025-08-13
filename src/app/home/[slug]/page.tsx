@@ -28,7 +28,7 @@ export default async function Page({
   if (!Component) notFound();
 
   return (
-    <div className="px-[20px] h-full pt-[54px] gap-[40px] flex flex-col">
+    <div className="gap-[40px] flex flex-col h-full">
       {(slug === "join" || slug === "story") && (
         <HomeHeader>가치한상</HomeHeader>
       )}
