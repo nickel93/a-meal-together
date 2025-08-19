@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SessionProvider } from "@/widgets/provider";
+import ReactQueryProvider from "@/widgets/provider/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +24,9 @@ export default function RootLayout({
 
       <body>
         <div className="w-[375px] h-[812px] mx-auto bg-white flex flex-col">
-          {children}
+          <SessionProvider>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </SessionProvider>
         </div>
       </body>
     </html>

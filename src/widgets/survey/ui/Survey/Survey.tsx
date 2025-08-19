@@ -10,25 +10,36 @@ import {
 import { SURVEY_QUESTION } from "../../model/const";
 import { useState } from "react";
 import Question from "@/feature/survey/ui/Question";
+import { useQuery } from "@tanstack/react-query";
+import { SurveyDetail } from "../../model/types";
+import { fetchSurveyQuestion } from "../../lib/helper";
 
 const Survey = () => {
   const total = SURVEY_QUESTION.length;
   const [count, setCount] = useState(0);
 
+  const { data: current } = useQuery<SurveyDetail>({
+    queryKey: ["survey", 0, count],
+    queryFn: () => fetchSurveyQuestion(1, count),
+    placeholderData: () => SURVEY_QUESTION[count] as SurveyDetail,
+  });
+
   if (count >= total) {
     return <SurveyMatching />;
   }
 
-  const current = SURVEY_QUESTION[count];
-
   return (
     <div className="flex flex-col items-center gap-4 bg-[#F8F6F5] h-full">
-      <SurveySelector title={current.navi} />
+      <SurveySelector title={current?.navi ?? ""} />
       <SurveyCount now={count + 1} total={total} />
-      <SurveyTitle title={current.question} />
+      <SurveyTitle title={current?.question ?? ""} />
       <Question
-        type={current.type}
-        question={current.options ? [...current.options] : []}
+        type={
+          current?.type === "single" || current?.type === "multi"
+            ? current.type
+            : "single"
+        }
+        question={current?.options ? [...current.options] : []}
       />
       <SurveyButton onClick={() => setCount((prev) => prev + 1)} />
     </div>

@@ -1,6 +1,8 @@
-export const SURVEY_QUESTION = [
+import { SurveyDetail } from "./types";
+
+export const SURVEY_QUESTION: SurveyDetail[] = [
   {
-    id: 1,
+    id: "1",
     navi: "여행 성향",
     question: "나 혼자 여행을 간다면?",
     type: "single",
