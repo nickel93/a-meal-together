@@ -3,7 +3,7 @@ import { useState } from "react";
 
 interface QuestionProps {
   question: string[];
-  type: "single" | "multi";
+  type: "single" | "multi" | "input";
 }
 
 const Question = ({ question, type }: QuestionProps) => {

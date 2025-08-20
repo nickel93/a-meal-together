@@ -18,24 +18,25 @@ const mapType = (t: SurveyQuestionTypeAPI): SurveyType => {
 export const toSurveyDetail = (
   res: SurveyResponseAPI,
   index: number
-): SurveyDetail => {
+): SurveyDetail[] => {
   const list = res.data?.questions ?? [];
   const q = list[index];
-  if (!q) return { id: "", navi: "", question: "", type: "input", options: [] };
+  if (list.length === 0)
+    return [{ id: "", navi: "", question: "", type: "input", options: [] }];
 
-  return {
+  return list.map((q) => ({
     id: q.id,
     navi: `Q${index + 1}/${list.length}`,
     question: q.questionText,
     type: mapType(q.type),
     options: q.options ?? [],
-  };
+  })) as SurveyDetail[];
 };
 
 export async function fetchSurveyQuestion(
   surveyId: number,
   index: number
-): Promise<SurveyDetail> {
+): Promise<SurveyDetail[]> {
   const res = await getSurveyDetail(surveyId);
   return toSurveyDetail(res, index);
 }

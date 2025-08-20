@@ -11,37 +11,42 @@ import { SURVEY_QUESTION } from "../../model/const";
 import { useState } from "react";
 import Question from "@/feature/survey/ui/Question";
 import { useQuery } from "@tanstack/react-query";
-import { SurveyDetail } from "../../model/types";
+import type { SurveyDetail } from "../../model/types";
 import { fetchSurveyQuestion } from "../../lib/helper";
 
 const Survey = () => {
   const total = SURVEY_QUESTION.length;
   const [count, setCount] = useState(0);
 
-  const { data: current } = useQuery<SurveyDetail>({
-    queryKey: ["survey", 0, count],
+  // 서버에서 "전체 질문 배열"을 받아온다. (index는 navi 계산용으로만 사용됨)
+  const { data: list = SURVEY_QUESTION as SurveyDetail[] } = useQuery<
+    SurveyDetail[]
+  >({
+    queryKey: ["survey", 1, count], // 1은 예시 surveyId
     queryFn: () => fetchSurveyQuestion(1, count),
-    placeholderData: () => SURVEY_QUESTION[count] as SurveyDetail,
-    gcTime: 1000000,
+    placeholderData: () => SURVEY_QUESTION as SurveyDetail[],
+    staleTime: 60_000,
+    gcTime: 1_000_000,
   });
 
-  if (count >= total) {
-    return <SurveyMatching />;
-  }
+  if (count >= total) return <SurveyMatching />;
+
+  // 현재 보여줄 문항
+  const current = list[count] ?? SURVEY_QUESTION[count];
+
+  const type: "single" | "multi" | "input" =
+    current.type === "single" || current.type === "multi"
+      ? current.type
+      : "input";
+
+  const options = Array.isArray(current.options) ? current.options : [];
 
   return (
     <div className="flex flex-col items-center gap-4 bg-[#F8F6F5] h-full">
-      <SurveySelector title={current?.navi ?? ""} />
+      <SurveySelector title={current.navi ?? `Q${count + 1}/${list.length}`} />
       <SurveyCount now={count + 1} total={total} />
-      <SurveyTitle title={current?.question ?? ""} />
-      <Question
-        type={
-          current?.type === "single" || current?.type === "multi"
-            ? current.type
-            : "single"
-        }
-        question={current?.options ? [...current.options] : []}
-      />
+      <SurveyTitle title={current.question ?? ""} />
+      <Question type={type} question={[...options]} />
       <SurveyButton onClick={() => setCount((prev) => prev + 1)} />
     </div>
   );
