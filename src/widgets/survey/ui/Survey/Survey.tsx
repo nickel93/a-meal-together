@@ -22,6 +22,7 @@ const Survey = () => {
     queryKey: ["survey", 0, count],
     queryFn: () => fetchSurveyQuestion(1, count),
     placeholderData: () => SURVEY_QUESTION[count] as SurveyDetail,
+    gcTime: 1000000,
   });
 
   if (count >= total) {
