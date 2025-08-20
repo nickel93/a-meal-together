@@ -24,7 +24,9 @@ export default function RootLayout({
 
       <body>
         <div className="w-[375px] h-[812px] mx-auto bg-white flex flex-col">
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </SessionProvider>
         </div>
       </body>
     </html>
