@@ -30,7 +30,7 @@ const Question = ({ question, type }: QuestionProps) => {
           <button
             key={index}
             onClick={() => handleClick(index)}
-            className={`flex w-[335px] items-center px-[16px] py-[16px] rounded-[8px] bg-white text-base text-gray-700
+            className={`flex w-[335px] items-center px-[16px] py-[16px] rounded-[8px] bg-[#F7F7F7] text-base text-gray-700 font-semibold
               ${
                 isSelected
                   ? "border-[2px] border-[#E65F55]"

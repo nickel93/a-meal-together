@@ -42,7 +42,7 @@ const Survey = () => {
   const options = Array.isArray(current.options) ? current.options : [];
 
   return (
-    <div className="flex flex-col items-center gap-4 bg-[#F8F6F5] h-full">
+    <div className="flex flex-col items-center gap-4  h-full">
       <SurveySelector title={current.navi ?? `Q${count + 1}/${list.length}`} />
       <SurveyCount now={count + 1} total={total} />
       <SurveyTitle title={current.question ?? ""} />

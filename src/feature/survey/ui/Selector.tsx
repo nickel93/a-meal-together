@@ -5,7 +5,7 @@ const SurveySelector = ({ title }: { title: string }) => {
       <button>
         <LeftArrow />
       </button>
-      <p className="text-lg font-semibold text-gray-800">{title}</p>
+      <p className="text-[16px] font-medium text-black">{title}</p>
       <div className="w-6 h-6" />
     </div>
   );
