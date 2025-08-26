@@ -11,7 +11,7 @@ const HomeJoin = () => {
   return (
     <div className="flex flex-col items-start  h-full">
       <h1 className="text-2xl font-bold mb-4">예정된 한상모임</h1>
-      <p className="text-lg mb-6">
+      <p className="text-[16px] font-normal text-[#333333] mb-6">
         오직 전주에서 즐기는 특별한 한상! 인연이 될지도 모르는 우연이 기다리고
         있어요.
       </p>

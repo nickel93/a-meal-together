@@ -1,5 +1,12 @@
 import { notFound } from "next/navigation";
-import { HomeHeader, HomeJoin, HomeSchedule, HomeStory } from "@/widgets/home";
+import {
+  Charging,
+  HomeHeader,
+  HomeJoin,
+  HomeSchedule,
+  HomeStory,
+} from "@/widgets/home";
+import { HeaderIcon } from "@/icon";
 
 type Slug = "story" | "schedule" | "join";
 
@@ -16,6 +23,8 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
+  console.log("slug", slug);
+
   const Component =
     slug === "story"
       ? HomeStory
@@ -23,6 +32,8 @@ export default async function Page({
       ? HomeSchedule
       : slug === "join"
       ? HomeJoin
+      : slug === "charging"
+      ? Charging
       : null;
 
   if (!Component) notFound();
@@ -30,7 +41,9 @@ export default async function Page({
   return (
     <div className="gap-[40px] flex flex-col h-full">
       {(slug === "join" || slug === "story") && (
-        <HomeHeader>가치한상</HomeHeader>
+        <HomeHeader>
+          <HeaderIcon />
+        </HomeHeader>
       )}
       <Component />
     </div>

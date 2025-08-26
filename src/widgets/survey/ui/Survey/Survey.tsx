@@ -16,13 +16,13 @@ import { fetchSurveyQuestion } from "../../lib/helper";
 
 const Survey = () => {
   const total = SURVEY_QUESTION.length;
+  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
   const [count, setCount] = useState(0);
 
-  // 서버에서 "전체 질문 배열"을 받아온다. (index는 navi 계산용으로만 사용됨)
   const { data: list = SURVEY_QUESTION as SurveyDetail[] } = useQuery<
     SurveyDetail[]
   >({
-    queryKey: ["survey", 1, count], // 1은 예시 surveyId
+    queryKey: ["survey", 1, count],
     queryFn: () => fetchSurveyQuestion(1, count),
     placeholderData: () => SURVEY_QUESTION as SurveyDetail[],
     staleTime: 60_000,
@@ -31,7 +31,6 @@ const Survey = () => {
 
   if (count >= total) return <SurveyMatching />;
 
-  // 현재 보여줄 문항
   const current = list[count] ?? SURVEY_QUESTION[count];
 
   const type: "single" | "multi" | "input" =
@@ -46,7 +45,21 @@ const Survey = () => {
       <SurveySelector title={current.navi ?? `Q${count + 1}/${list.length}`} />
       <SurveyCount now={count + 1} total={total} />
       <SurveyTitle title={current.question ?? ""} />
-      <Question type={type} question={[...options]} />
+      <Question
+        selectedIndexes={selectedIndexes}
+        onSelect={(index) => {
+          if (type === "single") {
+            setSelectedIndexes([index]);
+          } else {
+            setSelectedIndexes((prev) =>
+              prev.includes(index)
+                ? prev.filter((i) => i !== index)
+                : [...prev, index]
+            );
+          }
+        }}
+        question={[...options]}
+      />
       <SurveyButton onClick={() => setCount((prev) => prev + 1)} />
     </div>
   );

@@ -1,24 +1,14 @@
 "use client";
-import { useState } from "react";
 
 interface QuestionProps {
   question: string[];
-  type: "single" | "multi" | "input";
+  selectedIndexes: number[];
+  onSelect: (index: number) => void;
 }
 
-const Question = ({ question, type }: QuestionProps) => {
-  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
-
+const Question = ({ question, onSelect, selectedIndexes }: QuestionProps) => {
   const handleClick = (index: number) => {
-    if (type === "single") {
-      setSelectedIndexes([index]);
-    } else {
-      setSelectedIndexes((prev) =>
-        prev.includes(index)
-          ? prev.filter((i) => i !== index)
-          : [...prev, index]
-      );
-    }
+    onSelect(index);
   };
 
   return (

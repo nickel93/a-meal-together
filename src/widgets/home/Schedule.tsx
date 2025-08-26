@@ -5,28 +5,45 @@ import { ScheduleCard } from "@/feature/home";
 import { BottleIcon, BottlesIcon, PotsIcon } from "@/icon";
 import LzCheckbox from "@/shared/checkbox/LzCheckbox";
 import { twMerge } from "tailwind-merge";
+import Navigator from "@/shared/navigator/Navigator";
+import { useRouter } from "next/navigation";
+
+type DrinkKey = "2plus" | "1bottle" | "2cups";
 
 interface DrinkCardProps {
   icon: React.ReactNode;
   label: string;
-  defaultChecked?: boolean;
+  checked: boolean;
+  onSelect: () => void;
 }
 
-const DrinkCard = ({ icon, label, defaultChecked }: DrinkCardProps) => {
-  const [checked, setChecked] = useState(!!defaultChecked);
-
+const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
   return (
-    <div className="relative aspect-[1/1.1] height-[156px] rounded-lg border border-[#E4E4E4] bg-white flex flex-col items-center justify-end">
-      <LzCheckbox defaultChecked={checked} onChange={setChecked} asBadge />
-      <div className="mt-1">{icon}</div>
-      <p className="mt-2 text-[12px] leading-4 font-pretendard font-semibold text-black">
+    <button
+      type="button"
+      role="radio"
+      aria-checked={checked}
+      onClick={onSelect}
+      className="relative aspect-[1/1.1] rounded-lg bg-white flex flex-col items-center justify-end"
+    >
+      {/* 체크 배지 */}
+      <div className="absolute left-2 top-2">
+        <LzCheckbox checked={checked} onChange={onSelect} asBadge />
+      </div>
+
+      {/* 아이콘 & 라벨 */}
+      <div className="mt-6">{icon}</div>
+      <p className="mt-2 mb-3 text-[12px] leading-4 font-pretendard font-semibold text-black">
         {label}
       </p>
-    </div>
+    </button>
   );
 };
 
 const Schedule = () => {
+  const [selected, setSelected] = useState<DrinkKey>("2plus");
+  const router = useRouter();
+
   return (
     <div
       className={twMerge(
@@ -35,9 +52,7 @@ const Schedule = () => {
         "flex flex-col gap-[20px]"
       )}
     >
-      <h1 className="text-[18px] leading-[26px] font-pretendard font-semibold">
-        한상모임
-      </h1>
+      <Navigator title="한상모임" />
 
       <ScheduleCard title="일시">
         <div className="h-[64px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
@@ -69,19 +84,35 @@ const Schedule = () => {
         <h2 className="text-[16px] leading-[22px] font-pretendard font-semibold">
           내 주량 선택
         </h2>
-        <div className="grid grid-cols-3 gap-4">
+
+        {/* 라디오 그룹 */}
+        <div role="radiogroup" className="grid grid-cols-3 gap-4">
           <DrinkCard
             icon={<BottlesIcon />}
             label="막걸리 2병 이상"
-            defaultChecked
+            checked={selected === "2plus"}
+            onSelect={() => setSelected("2plus")}
           />
-          <DrinkCard icon={<BottleIcon />} label="막걸리 1병" />
-          <DrinkCard icon={<PotsIcon />} label="막걸리 2잔↓" />
+          <DrinkCard
+            icon={<BottleIcon />}
+            label="막걸리 1병"
+            checked={selected === "1bottle"}
+            onSelect={() => setSelected("1bottle")}
+          />
+          <DrinkCard
+            icon={<PotsIcon />}
+            label="막걸리 2잔↓"
+            checked={selected === "2cups"}
+            onSelect={() => setSelected("2cups")}
+          />
         </div>
       </section>
 
       <div className="mt-auto pb-[24px]">
-        <button className="w-full h-[64px] rounded-xl bg-[#E35F57] text-white text-[18px] leading-[26px] font-pretendard font-semibold">
+        <button
+          className="w-full h-[64px] rounded-xl bg-[#E35F57] text-white text-[18px] leading-[26px] font-pretendard font-semibold"
+          onClick={() => router.push("/home/charging")}
+        >
           선택 완료
         </button>
       </div>

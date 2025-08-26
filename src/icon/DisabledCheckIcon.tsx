@@ -11,9 +11,9 @@ const DisabledCheckIcon = () => {
       <path
         d="M18.6668 7L9.50016 16.1667L5.3335 12"
         stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

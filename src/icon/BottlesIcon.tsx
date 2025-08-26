@@ -2,9 +2,9 @@ const BottlesIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="71"
-      height="93"
-      viewBox="0 0 71 93"
+      width="74"
+      height="92"
+      viewBox="0 0 74 92"
       fill="none"
     >
       <path
