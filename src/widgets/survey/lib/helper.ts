@@ -34,9 +34,8 @@ export const toSurveyDetail = (
 };
 
 export async function fetchSurveyQuestion(
-  surveyId: number,
-  index: number
-): Promise<SurveyDetail[]> {
+  surveyId: number
+): Promise<SurveyResponseAPI> {
   const res = await getSurveyDetail(surveyId);
-  return toSurveyDetail(res, index);
+  return res;
 }

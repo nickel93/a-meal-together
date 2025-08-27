@@ -7,44 +7,48 @@ import {
   SurveySelector,
   SurveyTitle,
 } from "@/feature/survey";
-import { SURVEY_QUESTION } from "../../model/const";
 import { useState } from "react";
 import Question from "@/feature/survey/ui/Question";
 import { useQuery } from "@tanstack/react-query";
-import type { SurveyDetail } from "../../model/types";
 import { fetchSurveyQuestion } from "../../lib/helper";
+import { SurveyResponseAPI } from "@/api/survey/types";
 
 const Survey = () => {
-  const total = SURVEY_QUESTION.length;
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
   const [count, setCount] = useState(0);
 
-  const { data: list = SURVEY_QUESTION as SurveyDetail[] } = useQuery<
-    SurveyDetail[]
-  >({
-    queryKey: ["survey", 1, count],
-    queryFn: () => fetchSurveyQuestion(1, count),
-    placeholderData: () => SURVEY_QUESTION as SurveyDetail[],
-    staleTime: 60_000,
-    gcTime: 1_000_000,
+  // ✅ 전체 설문 데이터 한 번만 가져오기
+  const { data } = useQuery<SurveyResponseAPI>({
+    queryKey: ["survey", 1],
+    queryFn: () => fetchSurveyQuestion(1), // count 제거
+    staleTime: Infinity, // 한 번 가져오면 다시 호출 안 함
+    gcTime: Infinity,
   });
+
+  if (!data) {
+    return null;
+  }
+
+  const total = data.data.questions.length;
 
   if (count >= total) return <SurveyMatching />;
 
-  const current = list[count] ?? SURVEY_QUESTION[count];
+  const current = data.data.questions[count];
 
   const type: "single" | "multi" | "input" =
-    current.type === "single" || current.type === "multi"
-      ? current.type
+    current.type === "SINGLE_CHOICE"
+      ? "single"
+      : current.type === "MULTIPLE_CHOICE_MULTI"
+      ? "multi"
       : "input";
 
   const options = Array.isArray(current.options) ? current.options : [];
 
   return (
-    <div className="flex flex-col items-center gap-4  h-full">
-      <SurveySelector title={current.navi ?? `Q${count + 1}/${list.length}`} />
+    <div className="flex flex-col items-center gap-4 h-full">
+      <SurveySelector title={current.questionText} />
       <SurveyCount now={count + 1} total={total} />
-      <SurveyTitle title={current.question ?? ""} />
+      <SurveyTitle title={current.questionText ?? ""} />
       <Question
         selectedIndexes={selectedIndexes}
         onSelect={(index) => {
@@ -58,9 +62,14 @@ const Survey = () => {
             );
           }
         }}
-        question={[...options]}
+        question={options}
       />
-      <SurveyButton onClick={() => setCount((prev) => prev + 1)} />
+      <SurveyButton
+        onClick={() => {
+          setSelectedIndexes([]); // 다음 질문 넘어가면 선택 초기화
+          setCount((prev) => prev + 1);
+        }}
+      />
     </div>
   );
 };

@@ -1,61 +1,28 @@
+// src/shared/ui/LzInput.tsx
 "use client";
 
-import { useId } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-type LzInputProps = {
-  label?: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: (v: string) => void;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
-  disabled?: boolean;
-  className?: string;
-  name?: string;
-};
+const fieldClass =
+  "h-[54px] w-full rounded-lg border border-[#E4E4E4] bg-white px-4 outline-none";
+const placeholderClass = "placeholder:text-[#A1A1A9]";
+const labelClass =
+  "font-pretendard font-semibold text-[16px] leading-[22px] text-[#222]";
 
-export default function LzInput({
-  label,
-  placeholder,
-  value,
-  onChange,
-  type = "text",
-  disabled,
-  className = "",
-  name,
-}: LzInputProps) {
-  const id = useId();
+export interface LzInputProps extends ComponentPropsWithoutRef<"input"> {
+  label: string;
+}
 
+const LzInput = ({ label, className, ...props }: LzInputProps) => {
   return (
-    <div className={`w-full max-w-[335px] ${className}`}>
-      {label && (
-        <label
-          htmlFor={id}
-          className="block mb-2 text-[18px] leading-[26px] font-pretendard font-semibold"
-        >
-          {label}
-        </label>
-      )}
-
+    <div className="mb-5 flex flex-col gap-1">
+      <label className={labelClass}>{label}</label>
       <input
-        id={id}
-        name={name}
-        type={type}
-        disabled={disabled}
-        value={value}
-        onChange={(e) => onChange?.(e.target.value)}
-        placeholder={placeholder}
-        className="
-          w-full h-[54px]
-          rounded-lg border border-[#E4E4E4]
-          bg-white
-          px-4
-          text-[16px] leading-[22px]
-          placeholder-[#A1A1A9]
-          outline-none
-          focus:border-[#6F6F77]
-          disabled:opacity-50 disabled:cursor-not-allowed
-        "
+        {...props}
+        className={`${fieldClass} ${placeholderClass} ${className ?? ""}`}
       />
     </div>
   );
-}
+};
+
+export default LzInput;

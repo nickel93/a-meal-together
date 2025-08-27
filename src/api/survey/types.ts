@@ -4,7 +4,8 @@ export type SurveyStatus = "DRAFT" | "PUBLISHED" | "CLOSED";
 export type SurveyQuestionTypeAPI =
   | "SHORT_ANSWER"
   | "MULTIPLE_CHOICE_SINGLE"
-  | "MULTIPLE_CHOICE_MULTI";
+  | "MULTIPLE_CHOICE_MULTI"
+  | "SINGLE_CHOICE";
 
 export interface SurveyQuestionAPI {
   id: number;
