@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 type OneMobileTitleProps = React.HTMLAttributes<HTMLParagraphElement>;
 
-const HomeHeader = ({ className, ...rest }: OneMobileTitleProps) => {
+const JoinHeader = ({ className, ...rest }: OneMobileTitleProps) => {
   return (
     <p
       className={twMerge(
@@ -18,4 +18,4 @@ const HomeHeader = ({ className, ...rest }: OneMobileTitleProps) => {
   );
 };
 
-export default HomeHeader;
+export default JoinHeader;

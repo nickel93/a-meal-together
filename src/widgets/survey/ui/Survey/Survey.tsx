@@ -17,11 +17,10 @@ const Survey = () => {
   const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
   const [count, setCount] = useState(0);
 
-  // ✅ 전체 설문 데이터 한 번만 가져오기
   const { data } = useQuery<SurveyResponseAPI>({
     queryKey: ["survey", 1],
-    queryFn: () => fetchSurveyQuestion(1), // count 제거
-    staleTime: Infinity, // 한 번 가져오면 다시 호출 안 함
+    queryFn: () => fetchSurveyQuestion(1),
+    staleTime: Infinity,
     gcTime: Infinity,
   });
 

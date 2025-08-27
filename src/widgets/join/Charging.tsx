@@ -4,7 +4,7 @@ import { LzButton } from "@/shared/button";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-const Charging = () => {
+const JoinCharging = () => {
   const router = useRouter();
 
   return (
@@ -45,4 +45,4 @@ const Charging = () => {
   );
 };
 
-export default Charging;
+export default JoinCharging;

@@ -3,7 +3,7 @@
 import { LzButton } from "@/shared/button";
 import { useRouter } from "next/navigation";
 
-const HomeStory = () => {
+const JoinStory = () => {
   const router = useRouter();
   return (
     <div className="flex flex-col items-start justify-between h-full">
@@ -38,7 +38,7 @@ const HomeStory = () => {
       <LzButton
         onClick={() => {
           // Handle button click, e.g., navigate to a different page
-          router.push("/home/join");
+          router.push("/join/table");
         }}
       >
         확인
@@ -46,4 +46,4 @@ const HomeStory = () => {
     </div>
   );
 };
-export default HomeStory;
+export default JoinStory;

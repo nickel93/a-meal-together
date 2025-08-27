@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ScheduleCard } from "@/feature/home";
+import { ScheduleCard } from "@/feature/join";
 import { BottleIcon, BottlesIcon, PotsIcon } from "@/icon";
 import LzCheckbox from "@/shared/checkbox/LzCheckbox";
 import { twMerge } from "tailwind-merge";
@@ -111,7 +111,7 @@ const Schedule = () => {
       <div className="mt-auto pb-[24px]">
         <button
           className="w-full h-[64px] rounded-xl bg-[#E35F57] text-white text-[18px] leading-[26px] font-pretendard font-semibold"
-          onClick={() => router.push("/home/charging")}
+          onClick={() => router.push("/join/charging")}
         >
           선택 완료
         </button>

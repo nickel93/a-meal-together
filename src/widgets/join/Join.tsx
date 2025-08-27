@@ -1,11 +1,11 @@
 "use client";
 
-import { HomeJoinCard } from "@/feature/home";
+import { HomeJoinCard } from "@/feature/join";
 import { LzButton } from "@/shared/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const HomeJoin = () => {
+const JoinTable = () => {
   const router = useRouter();
   const [selected, setSelected] = useState<string>("");
   return (
@@ -32,10 +32,10 @@ const HomeJoin = () => {
         ))}
       </div>
 
-      <LzButton onClick={() => router.push("/home/schedule")}>
+      <LzButton onClick={() => router.push("/join/schedule")}>
         <span className="text-white">모임 참여하기</span>
       </LzButton>
     </div>
   );
 };
-export default HomeJoin;
+export default JoinTable;

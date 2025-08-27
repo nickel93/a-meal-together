@@ -1,19 +1,19 @@
 import { notFound } from "next/navigation";
+import { HeaderIcon } from "@/icon";
 import {
   Charging,
-  HomeHeader,
-  HomeJoin,
-  HomeSchedule,
-  HomeStory,
-} from "@/widgets/home";
-import { HeaderIcon } from "@/icon";
+  JoinHeader,
+  JoinSchedule,
+  JoinStory,
+  JoinTable,
+} from "@/widgets/join";
 
-type Slug = "story" | "schedule" | "join";
+type Slug = "story" | "schedule" | "table";
 
 export const dynamicParams = false;
 
 export function generateStaticParams(): { slug: Slug }[] {
-  return [{ slug: "story" }, { slug: "schedule" }, { slug: "join" }];
+  return [{ slug: "story" }, { slug: "schedule" }, { slug: "table" }];
 }
 
 export default async function Page({
@@ -23,15 +23,13 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  console.log("slug", slug);
-
   const Component =
     slug === "story"
-      ? HomeStory
+      ? JoinStory
       : slug === "schedule"
-      ? HomeSchedule
-      : slug === "join"
-      ? HomeJoin
+      ? JoinSchedule
+      : slug === "table"
+      ? JoinTable
       : slug === "charging"
       ? Charging
       : null;
@@ -40,10 +38,10 @@ export default async function Page({
 
   return (
     <div className="gap-[40px] flex flex-col h-full">
-      {(slug === "join" || slug === "story") && (
-        <HomeHeader>
+      {(slug === "table" || slug === "story") && (
+        <JoinHeader>
           <HeaderIcon />
-        </HomeHeader>
+        </JoinHeader>
       )}
       <Component />
     </div>

@@ -1,4 +1,4 @@
-import { KaKaoButton } from "@/feature/home";
+import { KaKaoButton } from "@/feature/join";
 
 const HomeFooter = () => {
   return (
