@@ -8,12 +8,17 @@ import {
   JoinTable,
 } from "@/widgets/join";
 
-type Slug = "story" | "schedule" | "table";
+type Slug = "story" | "schedule" | "table" | "charging";
 
 export const dynamicParams = false;
 
 export function generateStaticParams(): { slug: Slug }[] {
-  return [{ slug: "story" }, { slug: "schedule" }, { slug: "table" }];
+  return [
+    { slug: "story" },
+    { slug: "schedule" },
+    { slug: "table" },
+    { slug: "charging" },
+  ];
 }
 
 export default async function Page({

@@ -1,6 +1,8 @@
 "use client";
 
 import { LzButton } from "@/shared/button";
+import { LzInput } from "@/shared/input";
+import Navigator from "@/shared/navigator/Navigator";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
@@ -15,15 +17,17 @@ const JoinCharging = () => {
         "flex flex-col gap-[20px]"
       )}
     >
+      <Navigator title="보증금 결제" />
       <h1 className="text-[20px] leading-[28px] font-pretendard font-semibold">
         보증금 결제를 진행해 주세요.
       </h1>
-
-      <div className="flex justify-between items-center h-[64px] px-4 rounded-xl border border-[#E4E4E4] bg-[#F7F7F7]">
+      <div className="flex justify-between items-center h-[54px] px-4 rounded-xl border border-[#E4E4E4] bg-[#F7F7F7]">
         <span className="text-[16px] font-pretendard font-semibold">
           보증금
         </span>
-        <span className="text-[18px] font-pretendard font-semibold"></span>
+        <span className="text-[18px] font-pretendard font-semibold">
+          100,000원
+        </span>
       </div>
 
       <div className="flex flex-col gap-1 text-[14px] leading-[20px] text-[#6F6F77]">
@@ -38,7 +42,7 @@ const JoinCharging = () => {
         결제 시 이용약관에 동의하게 됩니다.
       </p>
 
-      <div className="pb-[24px]">
+      <div className="mt-auto">
         <LzButton onClick={() => router.push("/home")}>결제하기</LzButton>
       </div>
     </div>
