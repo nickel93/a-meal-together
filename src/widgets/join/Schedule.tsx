@@ -7,6 +7,7 @@ import LzCheckbox from "@/shared/checkbox/LzCheckbox";
 import { twMerge } from "tailwind-merge";
 import Navigator from "@/shared/navigator/Navigator";
 import { useRouter } from "next/navigation";
+import { LzButton } from "@/shared/button";
 
 type DrinkKey = "2plus" | "1bottle" | "2cups";
 
@@ -85,7 +86,6 @@ const Schedule = () => {
           내 주량 선택
         </h2>
 
-        {/* 라디오 그룹 */}
         <div role="radiogroup" className="grid grid-cols-3 gap-4">
           <DrinkCard
             icon={<BottlesIcon />}
@@ -109,12 +109,9 @@ const Schedule = () => {
       </section>
 
       <div className="mt-auto pb-[24px]">
-        <button
-          className="w-full h-[64px] rounded-xl bg-[#E35F57] text-white text-[18px] leading-[26px] font-pretendard font-semibold"
-          onClick={() => router.push("/join/charging")}
-        >
+        <LzButton onClick={() => router.push("/join/charging")}>
           선택 완료
-        </button>
+        </LzButton>
       </div>
     </div>
   );

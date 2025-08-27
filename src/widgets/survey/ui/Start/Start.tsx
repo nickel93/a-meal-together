@@ -12,7 +12,7 @@ const SurveyStart = () => {
       <div className="flex flex-col items-start gap-[40px] h-full">
         <SurveyHeader />
         <SurveyMain />
-        <SurveyButton onClick={() => push("/survey")} />
+        <SurveyButton onClick={() => push("/signup")} />
       </div>
     </>
   );
