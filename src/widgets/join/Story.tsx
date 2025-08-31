@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const JoinStory = () => {
   const router = useRouter();
   return (
-    <div className="flex flex-col items-start justify-between h-full">
+    <div className="flex flex-col items-start justify-between flex-grow h-full">
       <div className="flex flex-col gap-[40px]">
         <div>
           <p className="font-pretendard font-semibold text-[24px] leading-[36px] tracking-[0] text-[#000]">

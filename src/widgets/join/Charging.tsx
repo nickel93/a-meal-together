@@ -1,32 +1,58 @@
 "use client";
 
 import { LzButton } from "@/shared/button";
-import { LzInput } from "@/shared/input";
 import Navigator from "@/shared/navigator/Navigator";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+import { useMutation } from "@tanstack/react-query";
+import { attendRoom } from "@/api/room/room";
 
 const JoinCharging = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const roomId = searchParams.get("id") ?? "";
+  const language = searchParams.get("language") ?? "ko";
+  const count = searchParams.get("count") ?? "";
+  const money = searchParams.get("money") ?? "";
+
+  const mutation = useMutation({
+    mutationFn: () =>
+      attendRoom({
+        oauthId: "7912",
+        calRoomId: roomId,
+        language,
+        count,
+        money,
+      }),
+    onSuccess: () => {
+      alert("참석 및 결제가 완료되었습니다 🎉");
+      router.push("/home");
+    },
+    onError: () => {
+      alert("참석 신청/결제에 실패했습니다 ❌");
+    },
+  });
 
   return (
     <div
       className={twMerge(
         "mx-auto w-[375px] min-h-screen bg-white",
-        "pt-[54px] px-[20px]",
         "flex flex-col gap-[20px]"
       )}
     >
-      <Navigator title="보증금 결제" />
+      <Navigator onClick={() => router.back()} title="보증금 결제" />
+
       <h1 className="text-[20px] leading-[28px] font-pretendard font-semibold">
         보증금 결제를 진행해 주세요.
       </h1>
+
       <div className="flex justify-between items-center h-[54px] px-4 rounded-xl border border-[#E4E4E4] bg-[#F7F7F7]">
         <span className="text-[16px] font-pretendard font-semibold">
           보증금
         </span>
         <span className="text-[18px] font-pretendard font-semibold">
-          100,000원
+          {Number(money).toLocaleString()}원
         </span>
       </div>
 
@@ -42,9 +68,9 @@ const JoinCharging = () => {
         결제 시 이용약관에 동의하게 됩니다.
       </p>
 
-      <div className="mt-auto">
-        <LzButton onClick={() => router.push("/home")}>결제하기</LzButton>
-      </div>
+      <LzButton onClick={() => mutation.mutate()} disabled={mutation.isPending}>
+        {mutation.isPending ? "결제 중..." : "결제하기"}
+      </LzButton>
     </div>
   );
 };

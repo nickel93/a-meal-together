@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CheckedIcon, DisabledCheckIcon } from "@/icon";
 
 export interface LzCheckboxProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, "onChange"> {
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "onChange"> {
   id?: string;
   name?: string;
   value?: string;
@@ -41,25 +41,22 @@ const LzCheckbox = (props: LzCheckboxProps) => {
   };
 
   return (
-    <button
-      type="button"
+    <span
       id={id}
-      name={name}
-      value={value}
-      aria-pressed={isChecked}
+      role="checkbox"
+      aria-checked={isChecked}
       aria-disabled={disabled}
-      disabled={disabled}
       onClick={toggle}
       className={[
         asBadge ? "absolute top-3 right-3" : "",
-        "h-6 w-6 inline-flex items-center justify-center",
+        "h-6 w-6 inline-flex items-center justify-center rounded",
         disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
         className || "",
       ].join(" ")}
       {...rest}
     >
       {isChecked ? <CheckedIcon /> : <DisabledCheckIcon />}
-    </button>
+    </span>
   );
 };
 

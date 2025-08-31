@@ -6,7 +6,6 @@ interface HomeJoinCardProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   description?: string;
-  /** 부모 컨테이너 폭을 채우도록(w-full) 혹은 335px 고정 */
   fullWidth?: boolean;
   disabled?: boolean;
   leftIcon?: React.ReactNode;
@@ -32,7 +31,7 @@ function HomeJoinCard({
       aria-disabled={disabled}
       disabled={disabled}
       className={twMerge(
-        "min-h-[76px] py-4 px-4",
+        "min-h-[54px] py-4 px-4",
         fullWidth ? "w-full" : "w-[335px]",
         "inline-flex items-center justify-between gap-3",
         "rounded-lg border",

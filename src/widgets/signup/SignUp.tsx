@@ -29,7 +29,7 @@ const SignUp = () => {
         phoneNumber: phone,
         gender: gender === "M" ? "MALE" : "FEMALE",
         birthday: birth,
-        oauthId: Math.random() + "",
+        oauthId: "7912",
         oauthType: "KAKAO",
       });
       console.log("회원가입 성공");
@@ -49,14 +49,12 @@ const SignUp = () => {
         <Navigator title="회원가입" />
       </div>
 
-      {/* 타이틀 */}
       <div className="mb-8 font-semibold text-[24px] leading-[36px] text-black">
         가치한상 이용을 위해
         <br />
         개인정보를 입력해 주세요.
       </div>
 
-      {/* 이름 */}
       <LzInput
         label="이름"
         type="text"
@@ -65,7 +63,6 @@ const SignUp = () => {
         onChange={(e) => setName(e.target.value)}
       />
 
-      {/* 성별 */}
       <LzSelect
         label="성별"
         value={gender}
@@ -76,7 +73,6 @@ const SignUp = () => {
         <option value="F">여성</option>
       </LzSelect>
 
-      {/* 출생연도 */}
       <LzInput
         label="출생연도"
         type="text"
@@ -86,7 +82,6 @@ const SignUp = () => {
         onChange={(e) => setBirth(e.target.value)}
       />
 
-      {/* 전화번호 */}
       <LzInput
         label="전화번호"
         type="tel"

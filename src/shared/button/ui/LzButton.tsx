@@ -23,7 +23,7 @@ const LzButton = ({
       onClick={onClick}
       onSubmit={onSubmit}
       disabled={disabled}
-      className={`flex items-center justify-center w-full h-[48px] px-[16px] py-[12px] gap-[4px] rounded-[8px] text-white text-base font-semibold
+      className={`flex mt-auto items-center justify-center w-full h-[48px] px-[16px] py-[12px] gap-[4px] rounded-[8px] text-white text-base font-semibold
         ${disabled ? "bg-[#D1D5DC] cursor-not-allowed" : "bg-[#E65F55]"}
       `}
     >

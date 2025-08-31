@@ -3,7 +3,7 @@ import { SurveyStart } from "@/widgets/survey";
 
 const Page = () => {
   return (
-    <div className="bg-[#fff]  gap-[40px] flex flex-col">
+    <div className="bg-[#fff]  gap-[40px] flex flex-col flex-grow">
       <HeaderIcon />
       <SurveyStart />
     </div>

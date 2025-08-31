@@ -6,7 +6,7 @@ import { BottleIcon, BottlesIcon, PotsIcon } from "@/icon";
 import LzCheckbox from "@/shared/checkbox/LzCheckbox";
 import { twMerge } from "tailwind-merge";
 import Navigator from "@/shared/navigator/Navigator";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LzButton } from "@/shared/button";
 
 type DrinkKey = "2plus" | "1bottle" | "2cups";
@@ -27,16 +27,13 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
       onClick={onSelect}
       className="relative aspect-[1/1.1] rounded-lg bg-white flex flex-col items-center justify-end"
     >
-      {/* 체크 배지 */}
-      <div className="absolute left-2 top-2">
-        <LzCheckbox checked={checked} onChange={onSelect} asBadge />
-      </div>
-
-      {/* 아이콘 & 라벨 */}
       <div className="mt-6">{icon}</div>
       <p className="mt-2 mb-3 text-[12px] leading-4 font-pretendard font-semibold text-black">
         {label}
       </p>
+      <div className="absolute right-2 top-2">
+        <LzCheckbox checked={checked} onChange={onSelect} asBadge />
+      </div>
     </button>
   );
 };
@@ -44,21 +41,24 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
 const Schedule = () => {
   const [selected, setSelected] = useState<DrinkKey>("2plus");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const roomId = searchParams.get("id");
+  const roomTitle = searchParams.get("title"); // ✅ query에서 title 가져오기
 
   return (
     <div
       className={twMerge(
         "mx-auto w-[375px] min-h-screen bg-white",
-        "pt-[54px] px-[20px]",
         "flex flex-col gap-[20px]"
       )}
     >
       <Navigator title="한상모임" />
 
       <ScheduleCard title="일시">
-        <div className="h-[64px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
+        <div className="h-[54px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
           <span className="truncate font-pretendard font-semibold text-[18px] leading-[26px]">
-            8월 12일, 오후 7:00
+            {roomTitle ?? "일정 정보 없음"} {/* ✅ title 대체 */}
           </span>
           <button
             type="button"
@@ -70,7 +70,7 @@ const Schedule = () => {
       </ScheduleCard>
 
       <ScheduleCard title="내 언어">
-        <div className="h-[64px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
+        <div className="h-[54px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
           <span className="text-[16px] leading-[22px]">한국어</span>
           <button
             type="button"
@@ -108,8 +108,19 @@ const Schedule = () => {
         </div>
       </section>
 
-      <div className="mt-auto pb-[24px]">
-        <LzButton onClick={() => router.push("/join/charging")}>
+      <div className="mt-auto w-full">
+        <LzButton
+          onClick={() => {
+            if (!roomId) {
+              alert("room id가 없습니다.");
+              return;
+            }
+            const query = `id=${roomId}&title=${encodeURIComponent(
+              roomTitle ?? ""
+            )}&language=ko&count=${selected}&money=100000`; // 임시 보증금
+            router.push(`/join/charging?${query}`);
+          }}
+        >
           선택 완료
         </LzButton>
       </div>

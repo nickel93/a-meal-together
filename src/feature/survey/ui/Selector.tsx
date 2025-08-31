@@ -1,31 +1,15 @@
 "use client";
-const SurveySelector = ({ title }: { title: string }) => {
-  return (
-    <div className="flex items-center justify-between w-full px-4">
-      <button>
-        <LeftArrow />
-      </button>
-      <p className="text-[16px] font-medium text-black">{title}</p>
-      <div className="w-6 h-6" />
-    </div>
-  );
+
+import Navigator from "@/shared/navigator/Navigator";
+
+const SurveySelector = ({
+  title,
+  onClick,
+}: {
+  title: string;
+  onClick: () => void;
+}) => {
+  return <Navigator onClick={onClick} title={title} />;
 };
 
 export default SurveySelector;
-
-const LeftArrow = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-    >
-      <path
-        d="M15.5306 18.9695C15.6002 19.0392 15.6555 19.1219 15.6932 19.213C15.7309 19.304 15.7504 19.4016 15.7504 19.5001C15.7504 19.5987 15.7309 19.6963 15.6932 19.7873C15.6555 19.8784 15.6002 19.9611 15.5306 20.0308C15.4609 20.1004 15.3782 20.1557 15.2871 20.1934C15.1961 20.2311 15.0985 20.2506 14.9999 20.2506C14.9014 20.2506 14.8038 20.2311 14.7128 20.1934C14.6217 20.1557 14.539 20.1004 14.4693 20.0308L6.96932 12.5308C6.89958 12.4611 6.84427 12.3784 6.80652 12.2873C6.76878 12.1963 6.74935 12.0987 6.74935 12.0001C6.74935 11.9016 6.76878 11.804 6.80652 11.7129C6.84427 11.6219 6.89958 11.5392 6.96932 11.4695L14.4693 3.96951C14.61 3.82878 14.8009 3.74972 14.9999 3.74972C15.199 3.74972 15.3898 3.82878 15.5306 3.96951C15.6713 4.11024 15.7504 4.30111 15.7504 4.50013C15.7504 4.69916 15.6713 4.89003 15.5306 5.03076L8.56025 12.0001L15.5306 18.9695Z"
-        fill="black"
-      />
-    </svg>
-  );
-};

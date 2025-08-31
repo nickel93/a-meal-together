@@ -2,8 +2,8 @@ import { Survey } from "@/widgets/survey";
 
 const Page = () => {
   return (
-    <div className="flex justify-center h-full">
-      <div className="w-[375px] px-[20px] pt-[20px] flex flex-col gap-[40px]">
+    <div className="flex justify-center h-full w-full ">
+      <div className="flex flex-col gap-[40px] flex-grow">
         <Survey />
       </div>
     </div>

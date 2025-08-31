@@ -7,7 +7,7 @@ interface SurveyButtonProps {
 
 const SurveyButton = ({ onClick, disabled = false }: SurveyButtonProps) => {
   return (
-    <div className="mt-auto pb-[51px]">
+    <div className="mt-auto">
       <button
         onClick={onClick}
         disabled={disabled}

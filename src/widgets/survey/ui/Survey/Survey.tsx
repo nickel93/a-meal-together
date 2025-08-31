@@ -44,8 +44,11 @@ const Survey = () => {
   const options = Array.isArray(current.options) ? current.options : [];
 
   return (
-    <div className="flex flex-col items-center gap-4 h-full">
-      <SurveySelector title={current.questionText} />
+    <div className="flex flex-col flex-grow items-center gap-4 h-full">
+      <SurveySelector
+        onClick={() => setCount((prev) => (prev === 0 ? 0 : prev - 1))}
+        title={current.questionText}
+      />
       <SurveyCount now={count + 1} total={total} />
       <SurveyTitle title={current.questionText ?? ""} />
       <Question

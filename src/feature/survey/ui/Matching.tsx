@@ -37,21 +37,19 @@ const SurveyMatching = () => {
   }, []);
 
   useEffect(() => {
-    if (progress === 100) {
-      const timer = setTimeout(() => {
-        router.push("/join/story");
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
+    // if (progress === 100) {
+    //   const timer = setTimeout(() => {
+    //     router.push("/join/story");
+    //   }, 1000);
+    //   return () => clearTimeout(timer);
+    // }
   }, [progress, router]);
 
   return (
-    <div className="relative flex flex-col justify-center items-center bg-[#E65F55] text-white w-full h-screen text-center overflow-hidden">
-      {/* 퍼센트 숫자 */}
+    <div className="relative flex flex-col w-full  bg-[#E65F55] text-white  h-screen text-center justify-center overflow-hidden">
       <p className="text-[48px] font-bold leading-none mb-2">{progress}%</p>
       <p className="text-[18px] font-medium">‘진짜’ 인연이 될 사람 매칭중</p>
 
-      {/* 구간별 아이콘 (등장 후 유지) */}
       {progress >= 0 && (
         <div className="absolute top-[20%] left-[20%]">
           <Icon0 />

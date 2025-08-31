@@ -42,7 +42,7 @@ export default async function Page({
   if (!Component) notFound();
 
   return (
-    <div className="gap-[40px] flex flex-col h-full">
+    <div className="gap-[40px] flex flex-col h-full flex-grow">
       {(slug === "table" || slug === "story") && (
         <JoinHeader>
           <HeaderIcon />

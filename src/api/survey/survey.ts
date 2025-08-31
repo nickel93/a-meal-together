@@ -27,3 +27,13 @@ export const getSurveyDraft = (surveyId: number, responseId?: number) => {
 
 export const getSurveyDetail = (id: number) =>
   apiRequest<SurveyResponseAPI>(endpoints.surveys.getDetail(id));
+
+export interface Room {
+  id: number;
+  title: string;
+  createdDate: string;
+  chatLink: string;
+  calRoomStatus: "REQUEST" | "CONFIRMED" | "CANCELLED";
+}
+
+export const getRoomList = () => apiRequest<Room[]>(`/api/v1/room/list`);
