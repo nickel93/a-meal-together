@@ -37,12 +37,12 @@ const SurveyMatching = () => {
   }, []);
 
   useEffect(() => {
-    // if (progress === 100) {
-    //   const timer = setTimeout(() => {
-    //     router.push("/join/story");
-    //   }, 1000);
-    //   return () => clearTimeout(timer);
-    // }
+    if (progress === 100) {
+      const timer = setTimeout(() => {
+        router.push("/join/story");
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
   }, [progress, router]);
 
   return (
