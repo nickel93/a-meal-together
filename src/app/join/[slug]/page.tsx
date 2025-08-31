@@ -7,6 +7,7 @@ import {
   JoinStory,
   JoinTable,
 } from "@/widgets/join";
+import { Suspense } from "react";
 
 type Slug = "story" | "schedule" | "table" | "charging";
 
@@ -42,13 +43,15 @@ export default async function Page({
   if (!Component) notFound();
 
   return (
-    <div className="gap-[40px] flex flex-col h-full flex-grow">
-      {(slug === "table" || slug === "story") && (
-        <JoinHeader>
-          <HeaderIcon />
-        </JoinHeader>
-      )}
-      <Component />
-    </div>
+    <Suspense>
+      <div className="gap-[40px] flex flex-col h-full flex-grow">
+        {(slug === "table" || slug === "story") && (
+          <JoinHeader>
+            <HeaderIcon />
+          </JoinHeader>
+        )}
+        <Component />
+      </div>
+    </Suspense>
   );
 }

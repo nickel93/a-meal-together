@@ -18,8 +18,6 @@ export interface LzCheckboxProps
 const LzCheckbox = (props: LzCheckboxProps) => {
   const {
     id,
-    name,
-    value,
     disabled,
     checked,
     defaultChecked = false,
