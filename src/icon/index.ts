@@ -7,3 +7,8 @@ export { default as SurveryLogo } from "./SurveryLogo";
 export { default as HeaderIcon } from "./HeaderIcon";
 export { default as SmileIcon } from "./SmileIcon";
 export { default as StarIcon } from "./StarIcon";
+export { default as AlarmIcon } from "./AlarmIcon";
+export { default as HomeIcon } from "./HomeIcon";
+export { default as TalkIcon } from "./TalkIcon";
+export { default as LookAroundIcon } from "./LookAroundIcon";
+export { default as SettingIcon } from "./SettingIcon";
