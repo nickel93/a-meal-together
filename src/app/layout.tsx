@@ -23,7 +23,7 @@ export default function RootLayout({
       </head>
 
       <body>
-        <div className="min-w-[375px] max-w-[375px] min-h-[812px] bg-white flex flex-col justify-start items-center  mx-auto">
+        <div className="min-w-[375px] max-w-[375px] h-screen bg-white flex flex-col justify-start items-center  mx-auto">
           <SessionProvider>
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </SessionProvider>
