@@ -1,6 +1,7 @@
 "use client";
 
 import { HomeIcon, LookAroundIcon, SettingIcon, TalkIcon } from "@/icon";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const menu = [
@@ -12,6 +13,7 @@ const menu = [
 
 const Footer = () => {
   const [active, setActive] = useState("home");
+  const router = useRouter();
 
   return (
     <footer className="fixed bottom-0  w-full max-w-[375px] h-[95px] border-t border-[#E4E4E4] bg-white">
@@ -21,7 +23,10 @@ const Footer = () => {
           return (
             <button
               key={key}
-              onClick={() => setActive(key)}
+              onClick={() => {
+                setActive(key);
+                router.push(`/${key}`);
+              }}
               className="flex flex-col items-center justify-center gap-1 cursor-pointer"
             >
               <Icon color={isActive ? "#E65F55" : undefined} />

@@ -1,0 +1,58 @@
+export const ROOM_CARDS = [
+  {
+    title: "어디로 될지 모르는 모임",
+    description: "우리 한상모임 6명은 모두 ‘P’ 입니다",
+    status: "모임 3일 전 오픈",
+    colorType: "PINK",
+    rightIcon: "✦",
+  },
+  {
+    title: "짠짠짠",
+    description: "모두 주량이 막걸리 2병 이상이에요",
+    status: "모임 3일 전 오픈",
+    colorType: "MINT",
+    rightIcon: "🥂",
+  },
+  {
+    title: "솔로천국 커플지옥",
+    description: "우리 한상모임은 6명 모두 솔로?!",
+    status: "모임 3일 전 오픈",
+    colorType: "BLUE",
+    rightIcon: "💔",
+  },
+  {
+    title: "다양한 막걸리",
+    description: "6명 중 5명은 최애 술이 막걸리에요",
+    status: "모임 3일 전 오픈",
+    colorType: "PINK",
+    rightIcon: "🍶",
+  },
+  {
+    title: "기빨리지만 신나",
+    description: "우리 한상모임은 6명 모두 ‘E’ 입니다",
+    status: "모임 3일 전 오픈",
+    colorType: "PURPLE",
+    rightIcon: "⚡",
+  },
+  {
+    title: "I’m Fine Thank you and you?",
+    description: "한국어를 못하는 외국인이 있어요.",
+    status: "모임 3일 전 오픈",
+    colorType: "YELLOW",
+    rightIcon: "⬡",
+  },
+  {
+    title: "Welcome to KOREA!",
+    description: "우리 한상모임엔 외국인이 2명 있어요",
+    status: "모임 2일 전 오픈",
+    colorType: "CORAL",
+    rightIcon: "◯",
+  },
+  {
+    title: "너 혹시 T 야?",
+    description: "우리 한상모임엔 5명이 F지만, T가 1명 있어요",
+    status: "모임 1일 전 오픈",
+    colorType: "GREEN",
+    rightIcon: "T",
+  },
+] as const;
