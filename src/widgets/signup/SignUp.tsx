@@ -41,10 +41,7 @@ const SignUp = () => {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="mx-auto w-[375px] min-h-screen bg-white  px-[20px] flex flex-col"
-    >
+    <form onSubmit={onSubmit} className="  min-h-screen bg-white flex flex-col">
       <div className="mb-6 text-center">
         <Navigator title="회원가입" />
       </div>
@@ -94,8 +91,7 @@ const SignUp = () => {
         }}
       />
 
-      {/* 버튼 */}
-      <div className="mt-auto pb-[24px]">
+      <div className="mt-auto">
         <LzButton type="submit" disabled={!canSubmit}>
           다음
         </LzButton>

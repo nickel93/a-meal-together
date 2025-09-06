@@ -37,7 +37,6 @@ const JoinStory = () => {
 
       <LzButton
         onClick={() => {
-          // Handle button click, e.g., navigate to a different page
           router.push("/join/table");
         }}
       >
