@@ -41,7 +41,10 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="  min-h-screen bg-white flex flex-col">
+    <form
+      onSubmit={onSubmit}
+      className="min-h-screen bg-white flex flex-col flex-grow"
+    >
       <div className="mb-6 text-center">
         <Navigator title="회원가입" />
       </div>
