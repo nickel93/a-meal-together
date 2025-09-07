@@ -20,7 +20,7 @@ const Login = () => {
         router.push("/onbornding");
       }
     },
-    onError: (error: any) => {
+    onError: (error) => {
       alert(error.message ?? "로그인 실패");
     },
   });
