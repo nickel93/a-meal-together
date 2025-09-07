@@ -21,7 +21,7 @@ const UserReviewCard = ({
   }[mood];
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-[#E9E9EC] bg-white p-4">
+    <div className="flex flex-col shrink-0 gap-2 rounded-lg border border-[#E9E9EC] bg-[#F7F7F7] p-4 w-[192px] h-[230px]">
       <div className="flex items-center gap-1 text-[14px]">
         <span>{moodIcon}</span>
         <span className="font-semibold text-[#E65F55]">{title}</span>

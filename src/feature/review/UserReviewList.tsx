@@ -17,7 +17,7 @@ const UserReviewList = ({ reviews }: UserReviewListProps) => {
   return (
     <div className="flex flex-col gap-3">
       <h3 className="font-semibold text-[16px]">가치한상 사용자 후기</h3>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="flex gap-3 overflow-x-auto">
         {reviews.map((review) => (
           <UserReviewCard key={review.id} {...review} />
         ))}
