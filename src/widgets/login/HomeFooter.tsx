@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const HomeFooter = () => {
   const router = useRouter();
   return (
-    <div className="w-full px-5 py-0 flex flex-col items-center gap-3 h-[114px]">
+    <div className="w-full px-5 py-0 flex flex-col items-center gap-3">
       <div className="flex justify-center items-center px-3 py-[5px] gap-[10px] w-[134px] h-[26px] border border-[#E65F55] rounded-full">
         <span className="text-[#E65F55] text-[12px] leading-[16px] font-semibold">
           5초만에 빠른 회원가입
