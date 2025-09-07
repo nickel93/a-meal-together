@@ -8,8 +8,8 @@ const Page = () => {
       <div className="flex flex-col flex-grow gap-[40px]">
         <HomeHeader />
         <MeetingReviewPage />
-        <Footer active="review" />
       </div>
+      <Footer active="review" />
     </div>
   );
 };
