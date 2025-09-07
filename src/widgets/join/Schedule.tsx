@@ -49,8 +49,8 @@ const Schedule = () => {
   return (
     <div
       className={twMerge(
-        "mx-auto w-[375px] min-h-screen bg-white",
-        "flex flex-col gap-[20px]"
+        "mx-auto w-[375px]  bg-white",
+        "flex flex-col gap-[20px] h-full"
       )}
     >
       <Navigator title="한상모임" />

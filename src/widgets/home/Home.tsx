@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Home = () => {
   const router = useRouter();
   return (
-    <div className="mx-auto w-[375px] min-h-screen bg-white flex flex-col gap-[40px] p-5">
+    <div className="mx-auto w-[375px]  bg-white flex flex-col gap-[40px] p-5">
       <div className="flex items-center justify-between">
         <HeaderIcon />
         <div

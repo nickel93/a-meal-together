@@ -68,7 +68,7 @@ const Survey = () => {
       />
       <SurveyButton
         onClick={() => {
-          setSelectedIndexes([]); // 다음 질문 넘어가면 선택 초기화
+          setSelectedIndexes([]);
           setCount((prev) => prev + 1);
         }}
       />

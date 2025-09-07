@@ -37,7 +37,7 @@ const JoinCharging = () => {
   return (
     <div
       className={twMerge(
-        "mx-auto w-[375px] min-h-screen bg-white",
+        "mx-auto w-[375px]  bg-white",
         "flex flex-col gap-[20px]"
       )}
     >

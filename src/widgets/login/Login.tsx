@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col flex-grow gap-[20px]">
+    <div className=" bg-white flex flex-col flex-grow gap-[20px]">
       <Navigator title="아이디로 로그인" />
 
       <LzInput
