@@ -5,7 +5,7 @@ import Home from "@/widgets/home/Home";
 
 const Page = () => {
   return (
-    <div className="bg-[#F8F6F5] flex flex-col">
+    <div className="flex flex-col px-[20px]">
       <Home />
       <Footer />
     </div>

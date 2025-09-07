@@ -12,3 +12,10 @@ export const signup = (data: SignupRequest) =>
     method: "POST",
     body: JSON.stringify(data),
   });
+
+export const putLogin = (username: string, password: string) => {
+  apiRequest<SignupResponse>(endpoints.member.backdoorLogin, {
+    method: "POST",
+    body: JSON.stringify({ username, password }),
+  });
+};

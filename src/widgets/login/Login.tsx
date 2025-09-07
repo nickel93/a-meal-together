@@ -6,19 +6,18 @@ import Navigator from "@/shared/navigator/Navigator";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { getMemberById } from "@/api/member/member";
+import { putLogin } from "@/api/member/member";
 
 const Login = () => {
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: () => getMemberById(Number(login)), // 아이디를 숫자로 변환해서 호출
+    mutationFn: async () => await putLogin(email, password), // 아이디를 숫자로 변환해서 호출
     onSuccess: (data) => {
-      if (data) {
-        router.push("/onbornding");
-      }
+      console.log("로그인 성공", data);
+      //router.push("/onbornding");
     },
     onError: (error) => {
       alert(error.message ?? "로그인 실패");
@@ -38,8 +37,8 @@ const Login = () => {
         type="text"
         inputMode="numeric"
         placeholder="아이디 입력"
-        value={login}
-        onChange={(e) => setLogin(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <LzInput
@@ -53,7 +52,7 @@ const Login = () => {
 
       <LzButton
         type="button"
-        disabled={!login || !password || isPending}
+        disabled={!email || !password || isPending}
         onClick={handleSubmit}
       >
         {isPending ? "확인 중..." : "다음"}

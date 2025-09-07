@@ -2,7 +2,7 @@ export interface SignupRequest {
   name: string;
   phoneNumber: string;
   gender: "MALE" | "FEMALE";
-  birthday: string; // YYYY-MM-DD
+  birthday: string;
   oauthId: string;
   oauthType: string;
 }
@@ -13,5 +13,4 @@ export interface SignupResponse {
   phoneNumber: string;
   gender: "MALE" | "FEMALE";
   birthday: string;
-  // 필요한 응답 필드 추가
 }

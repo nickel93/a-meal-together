@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 const Page = () => {
   return (
-    <div className="bg-[#fff]  gap-[40px] flex flex-col flex-grow">
+    <div className="bg-[#fff]  gap-[40px] flex flex-col flex-grow px-[20px]">
       <Suspense>
         <HeaderIcon />
         <SurveyStart />

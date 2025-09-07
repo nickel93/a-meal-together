@@ -4,6 +4,7 @@ export const endpoints = {
     signup: `/api/v1/member/signup`,
     getById: (memberId: number) => `/api/v1/member/${memberId}`,
     myInfo: "/api/v1/member/myInfo",
+    backdoorLogin: "/api/backdoor-login",
   },
   surveys: {
     submit: (surveyId: number) => `/api/surveys/${surveyId}/submit`,

@@ -7,7 +7,7 @@ import { useState } from "react";
 const menu = [
   { key: "home", label: "홈", icon: HomeIcon },
   { key: "review", label: "모임후기", icon: TalkIcon },
-  { key: "explore", label: "둘러보기", icon: LookAroundIcon },
+  { key: "streetmap", label: "둘러보기", icon: LookAroundIcon },
   { key: "mypage", label: "마이페이지", icon: SettingIcon },
 ];
 

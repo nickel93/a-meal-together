@@ -44,7 +44,7 @@ export default async function Page({
 
   return (
     <Suspense>
-      <div className="gap-[40px] flex flex-col h-full flex-grow">
+      <div className="gap-[40px] flex flex-col h-full flex-grow px-[20px]">
         {(slug === "table" || slug === "story") && (
           <JoinHeader>
             <HeaderIcon />
