@@ -51,32 +51,32 @@ const SurveyMatching = () => {
       <p className="text-[18px] font-medium">‘진짜’ 인연이 될 사람 매칭중</p>
 
       {progress >= 0 && (
-        <div className="absolute top-[45px] left-[27px]">
+        <div className="absolute top-[5.55%] left-[7.2%]">
           <Icon0 />
         </div>
       )}
       {progress >= 10 && (
-        <div className="absolute top-[89px] right-[24.45px]">
+        <div className="absolute top-[10.96%] right-[6.52%]">
           <Icon10 />
         </div>
       )}
       {progress >= 30 && (
-        <div className="absolute top-[82px] left-[332px]">
+        <div className="absolute top-[39.4%] left-[21.86%]">
           <Icon30 />
         </div>
       )}
       {progress >= 50 && (
-        <div className="absolute bottom-[309px] left-[48px]">
+        <div className="absolute bottom-[38.05%] left-[12.8%]">
           <Icon50 />
         </div>
       )}
       {progress >= 70 && (
-        <div className="absolute bottom-[109px] left-[46px]">
+        <div className="absolute bottom-[13.42%] left-[12.27%]">
           <Icon70 />
         </div>
       )}
       {progress >= 90 && (
-        <div className="absolute bottom-[70px] right-[44px]">
+        <div className="absolute bottom-[8.62%] right-[11.73%]">
           <Icon90 />
         </div>
       )}
