@@ -10,7 +10,10 @@ const Home = () => {
     <div className="mx-auto w-[375px] min-h-screen bg-white flex flex-col gap-[40px] p-5">
       <div className="flex items-center justify-between">
         <HeaderIcon />
-        <div onClick={() => router.push("/notification")}>
+        <div
+          className="cursor-pointer"
+          onClick={() => router.push("/notification")}
+        >
           <AlarmIcon />
         </div>
       </div>
