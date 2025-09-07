@@ -25,13 +25,13 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
       role="radio"
       aria-checked={checked}
       onClick={onSelect}
-      className="relative aspect-[1/1.1] rounded-lg bg-white flex flex-col items-center justify-end"
+      className="relative aspect-[1/1.1] rounded-lg bg-white flex flex-col items-center justify-end h-full"
     >
-      <div className="mt-6">{icon}</div>
+      <div>{icon}</div>
       <p className="mt-2 mb-3 text-[12px] leading-4 font-pretendard font-semibold text-black">
         {label}
       </p>
-      <div className="absolute right-2 top-2">
+      <div className="absolute top-0 right-0">
         <LzCheckbox checked={checked} onChange={onSelect} asBadge />
       </div>
     </button>
@@ -86,7 +86,7 @@ const Schedule = () => {
           내 주량 선택
         </h2>
 
-        <div role="radiogroup" className="grid grid-cols-3 gap-4">
+        <div role="radiogroup" className="grid grid-cols-3 gap-4 h-[156px]">
           <DrinkCard
             icon={<BottlesIcon />}
             label="막걸리 2병 이상"
