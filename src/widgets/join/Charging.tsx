@@ -38,7 +38,7 @@ const JoinCharging = () => {
     <div
       className={twMerge(
         "mx-auto w-[375px]  bg-white",
-        "flex flex-col gap-[20px]"
+        "flex flex-col gap-[20px] h-full"
       )}
     >
       <Navigator onClick={() => router.back()} title="보증금 결제" />
