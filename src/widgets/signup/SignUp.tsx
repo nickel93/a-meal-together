@@ -89,7 +89,7 @@ const SignUp = () => {
         placeholder="전화번호 입력('-' 제외하고 숫자만 입력)"
         value={phone}
         onChange={(e) => {
-          const v = e.target.value.replace(/\D/g, "");
+          const v = e.target.value;
           setPhone(v);
         }}
       />

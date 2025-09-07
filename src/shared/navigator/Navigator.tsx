@@ -13,7 +13,7 @@ const Navigator = (props: NavigatorProps) => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex items-center justify-between w-full h-[48px]">
       <button
         className="cursor-default"
         onClick={onClick ? onClick : () => router.back()}
