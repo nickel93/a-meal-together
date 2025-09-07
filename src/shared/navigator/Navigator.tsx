@@ -14,7 +14,10 @@ const Navigator = (props: NavigatorProps) => {
 
   return (
     <div className="flex items-center justify-between w-full">
-      <button onClick={onClick ? onClick : () => router.back()}>
+      <button
+        className="cursor-default"
+        onClick={onClick ? onClick : () => router.back()}
+      >
         <LeftArrowIcon />
       </button>
       <p className="text-[16px] font-medium text-black">{title}</p>

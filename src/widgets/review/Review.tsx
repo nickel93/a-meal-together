@@ -3,6 +3,7 @@
 import MeetingReviewButton from "@/feature/review/MeetingReviewButton";
 import MeetingReviewHeader from "@/feature/review/MeetingReviewHeader";
 import UserReviewList from "@/feature/review/UserReviewList";
+import Footer from "../home/Footer";
 
 interface Reviews {
   id: string;
