@@ -25,7 +25,7 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
       role="radio"
       aria-checked={checked}
       onClick={onSelect}
-      className="relative aspect-[1/1.1] rounded-lg bg-white flex flex-col items-center justify-end h-full"
+      className="relative  w-[156px] rounded-lg bg-white flex flex-col items-center justify-end "
     >
       <div>{icon}</div>
       <p className="mt-2 mb-3 text-[12px] leading-4 font-pretendard font-semibold text-black">
@@ -86,7 +86,7 @@ const Schedule = () => {
           내 주량 선택
         </h2>
 
-        <div role="radiogroup" className="grid grid-cols-3 gap-4 h-[156px]">
+        <div role="radiogroup" className="flex gap-4 h-[156px]">
           <DrinkCard
             icon={<BottlesIcon />}
             label="막걸리 2병 이상"
