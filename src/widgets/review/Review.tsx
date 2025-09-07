@@ -37,7 +37,7 @@ const mockReviews: Reviews[] = [
 
 const MeetingReviewPage = () => {
   return (
-    <div className="flex flex-col gap-6 px-[20px] py-6">
+    <div className="flex flex-col gap-6 py-6">
       <MeetingReviewHeader />
       <MeetingReviewButton />
       <UserReviewList reviews={mockReviews} />
