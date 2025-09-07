@@ -11,8 +11,13 @@ const menu = [
   { key: "mypage", label: "마이페이지", icon: SettingIcon },
 ];
 
-const Footer = () => {
-  const [active, setActive] = useState("home");
+interface FooterProps {
+  active?: string;
+}
+
+const Footer = (props: FooterProps) => {
+  const { active: initialActive = "home" } = props;
+  const [active, setActive] = useState(initialActive);
   const router = useRouter();
 
   return (
