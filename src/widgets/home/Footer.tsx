@@ -2,7 +2,7 @@
 
 import { HomeIcon, LookAroundIcon, SettingIcon, TalkIcon } from "@/icon";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const menu = [
   { key: "home", label: "홈", icon: HomeIcon },
@@ -12,13 +12,17 @@ const menu = [
 ];
 
 interface FooterProps {
-  active?: string;
+  active: string;
 }
 
 const Footer = (props: FooterProps) => {
   const { active: initialActive = "home" } = props;
   const [active, setActive] = useState(initialActive);
   const router = useRouter();
+
+  useEffect(() => {
+    setActive((prev) => (initialActive ? initialActive : prev));
+  }, [initialActive]);
 
   return (
     <footer className="fixed bottom-0  w-full max-w-[375px] h-[95px] border-t border-[#E4E4E4] bg-white">

@@ -4,10 +4,10 @@ import StreetMap from "@/widgets/streetmap/StreetMap";
 
 const Page = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-[20px] w-full">
       <HomeHeader />
       <StreetMap />
-      <HomeFooter />
+      <HomeFooter active={"streetmap"} />
     </div>
   );
 };
