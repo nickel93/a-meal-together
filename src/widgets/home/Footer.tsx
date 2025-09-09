@@ -12,7 +12,7 @@ const menu = [
 ];
 
 interface FooterProps {
-  active: string;
+  active?: string;
 }
 
 const Footer = (props: FooterProps) => {
