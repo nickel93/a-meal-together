@@ -16,7 +16,7 @@ const shops: Shop[] = [
   { id: 3, name: "옛촌막걸리", x: "50%", y: "65%" },
 ];
 
-const MapPin = ({ className = "w-8 h-8 text-red-500" }) => (
+const MapPin = ({ className = "w-6 h-6 text-red-500" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -45,15 +45,18 @@ const MakgeolliMap = () => {
           className="object-cover rounded-lg"
         />
 
-        {/* 마커 */}
+        {/* 마커 + 라벨 */}
         {shops.map((shop) => (
           <button
             key={shop.id}
             onClick={() => setSelected(shop)}
-            className="absolute -translate-x-1/2 -translate-y-full"
+            className="absolute cursor-pointer flex items-center gap-1 -translate-y-full"
             style={{ left: shop.x, top: shop.y }}
           >
             <MapPin />
+            <span className=" px-1 py-0.5 text-xs font-semibold text-black">
+              {shop.name}
+            </span>
           </button>
         ))}
       </div>
