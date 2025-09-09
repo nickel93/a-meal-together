@@ -6,7 +6,7 @@ import Image from "next/image";
 type Shop = {
   id: number;
   name: string;
-  x: string; // % 단위
+  x: string;
   y: string;
 };
 
@@ -36,7 +36,6 @@ const MakgeolliMap = () => {
 
   return (
     <div className="relative w-full h-full bg-[#F8F6F5]">
-      {/* 지도 */}
       <div className="relative w-full h-[500px]">
         <Image
           src={dealMap}
@@ -45,12 +44,11 @@ const MakgeolliMap = () => {
           className="object-cover rounded-lg"
         />
 
-        {/* 마커 + 라벨 */}
         {shops.map((shop) => (
           <button
             key={shop.id}
             onClick={() => setSelected(shop)}
-            className="absolute cursor-pointer flex items-center gap-1 -translate-y-full"
+            className="absolute cursor-pointer flex items-center  -translate-y-full"
             style={{ left: shop.x, top: shop.y }}
           >
             <MapPin />
@@ -61,7 +59,6 @@ const MakgeolliMap = () => {
         ))}
       </div>
 
-      {/* 가게 상세 카드 */}
       {selected && (
         <div className="absolute bottom-0 left-0 w-full rounded-t-2xl bg-white p-4 shadow-lg">
           <div className="flex justify-between items-center">
