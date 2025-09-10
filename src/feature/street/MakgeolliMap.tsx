@@ -2,6 +2,7 @@
 import dealMap from "./dealMap.png";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type Shop = {
   id: number;
@@ -33,9 +34,11 @@ const MapPin = ({ className = "w-6 h-6 text-red-500" }) => (
 
 const MakgeolliMap = () => {
   const [selected, setSelected] = useState<Shop | null>(null);
+  const router = useRouter();
 
   return (
     <div className="relative w-full h-full bg-[#F8F6F5]">
+      {/* 지도 */}
       <div className="relative w-full h-[500px]">
         <Image
           src={dealMap}
@@ -44,21 +47,29 @@ const MakgeolliMap = () => {
           className="object-cover rounded-lg"
         />
 
+        {/* 마커 */}
         {shops.map((shop) => (
           <button
             key={shop.id}
             onClick={() => setSelected(shop)}
-            className="absolute cursor-pointer flex items-center  -translate-y-full"
+            className="absolute cursor-pointer flex items-center -translate-y-full"
             style={{ left: shop.x, top: shop.y }}
           >
             <MapPin />
-            <span className=" px-1 py-0.5 text-xs font-semibold text-black">
+            <span className="ml-1  py-0.5 text-xs font-semibold text-black  rounded">
               {shop.name}
             </span>
           </button>
         ))}
+        <button
+          onClick={() => router.push("streetmap/detail")}
+          className="absolute cursor-pointer top-1.5 left-1.5 flex items-center gap-1 rounded bg-black/50 px-2 py-1 text-white text-sm"
+        >
+          전주 막걸리 골목 알아보기
+        </button>
       </div>
 
+      {/* 가게 상세 카드 */}
       {selected && (
         <div className="absolute bottom-0 left-0 w-full rounded-t-2xl bg-white p-4 shadow-lg">
           <div className="flex justify-between items-center">

@@ -15,7 +15,7 @@ const Navigator = (props: NavigatorProps) => {
   return (
     <div className="flex items-center justify-between w-full h-[48px]">
       <button
-        className="cursor-default"
+        className="cursor-pointer"
         onClick={onClick ? onClick : () => router.back()}
       >
         <LeftArrowIcon />
