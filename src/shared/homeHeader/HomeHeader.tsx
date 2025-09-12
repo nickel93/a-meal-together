@@ -1,12 +1,14 @@
 "use client";
-import { AlarmIcon, HeaderIcon } from "@/icon";
+import { AlarmIcon } from "@/icon";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import logo from "./logo.png";
 
 const HomeHeader = () => {
   const router = useRouter();
   return (
     <div className="flex items-center justify-between">
-      <HeaderIcon />
+      <Image src={logo} alt="logo" />
       <div onClick={() => router.push("/notification")}>
         <AlarmIcon />
       </div>

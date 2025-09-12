@@ -1,22 +1,12 @@
-import { AlarmIcon, HeaderIcon } from "@/icon";
 import { RoomCard } from "@/shared/roomcard";
 import { Section } from "@/shared/section";
 import { ROOM_CARDS } from "./__mock__/homeMock";
-import { useRouter } from "next/navigation";
+import { HomeHeader } from "@/shared/homeHeader";
 
 const Home = () => {
-  const router = useRouter();
   return (
     <div className="mx-auto w-[375px]  bg-white flex flex-col gap-[40px] p-5">
-      <div className="flex items-center justify-between">
-        <HeaderIcon />
-        <div
-          className="cursor-pointer"
-          onClick={() => router.push("/notification")}
-        >
-          <AlarmIcon />
-        </div>
-      </div>
+      <HomeHeader />
 
       <p className="font-semibold text-[24px]">예정된 한상 모임</p>
 

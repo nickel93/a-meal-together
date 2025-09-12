@@ -5,13 +5,11 @@ import { LzInput } from "@/shared/input";
 import Navigator from "@/shared/navigator/Navigator";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { putLogin } from "@/api/member/member";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const { mutate, isPending } = useMutation({
     mutationFn: async () => await putLogin(email, password), // 아이디를 숫자로 변환해서 호출

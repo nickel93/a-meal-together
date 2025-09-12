@@ -6,6 +6,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "가치 한상",
   description: "dinning together",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
