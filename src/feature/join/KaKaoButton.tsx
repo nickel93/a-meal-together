@@ -4,7 +4,6 @@ import { signIn } from "next-auth/react";
 
 const KaKaoButton = () => {
   const handleLogin = () => {
-    // 로그인 후 이동할 곳 지정 (기본은 callbacks.redirect에서 처리)
     signIn("kakao", { callbackUrl: "/onboarding" });
   };
 

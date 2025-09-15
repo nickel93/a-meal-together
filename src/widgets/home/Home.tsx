@@ -59,7 +59,6 @@ const Home = () => {
 
         {rooms && rooms.length > 0 && (
           <>
-            {/* 일시 */}
             <Section title="일시">
               <div className="flex items-center justify-between rounded-lg bg-[#F7F7F7] px-4 py-3 text-[16px] font-semibold">
                 <span>
@@ -93,7 +92,6 @@ const Home = () => {
               </div>
             </Section>
 
-            {/* 내 모임 정보 */}
             <Section title="내 모임 정보">
               <div className="flex overflow-x-auto gap-[12px]">
                 {rooms.map((room) => (
