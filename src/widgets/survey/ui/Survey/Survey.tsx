@@ -35,7 +35,7 @@ const Survey = () => {
   const type: "single" | "multi" | "input" =
     current.type === "SINGLE_CHOICE"
       ? "single"
-      : current.type === "MULTIPLE_CHOICE_MULTI"
+      : current.type === "MULTIPLE_CHOICE"
       ? "multi"
       : "input";
 
