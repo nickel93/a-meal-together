@@ -25,7 +25,7 @@ const RoomCard = ({
   title,
   description,
   status,
-  colorType = "BLUE",
+  colorType = "YELLOW",
   rightIcon,
   onClick,
 }: RoomCardProps) => {

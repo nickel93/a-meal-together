@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { RoomCard } from "@/shared/roomcard";
 import { Section } from "@/shared/section";
 import { HomeHeader } from "@/shared/homeHeader";
@@ -24,14 +25,14 @@ const mapStatusToColor = (
 ): RoomCardProps["colorType"] => {
   switch (status) {
     case "CONFIRMED":
-      return "GREEN"; // 확정된 모임 → 초록색
+      return "GREEN";
     case "REQUEST":
-      return "BLUE"; // 요청 중 → 파랑
+      return "BLUE";
     case "CANCELLED":
-      return "CORAL"; // 취소됨 → 코랄
+      return "CORAL";
     case "EMPTY":
     default:
-      return "YELLOW"; // 기본값 → 노랑
+      return "YELLOW";
   }
 };
 
@@ -45,6 +46,13 @@ const Home = () => {
     queryFn: getRoomList,
   });
 
+  // ✅ 선택된 모임 id (없으면 첫 번째를 기본 선택으로 사용)
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const selectedRoom =
+    rooms && rooms.length > 0
+      ? rooms.find((r) => r.id === selectedId) ?? rooms[0]
+      : null;
+
   return (
     <div className="mx-auto w-[375px] bg-white flex flex-col gap-[40px] p-5">
       <HomeHeader />
@@ -57,12 +65,13 @@ const Home = () => {
           <p className="text-red-500">모임 정보를 불러오지 못했습니다.</p>
         )}
 
-        {rooms && rooms.length > 0 && (
+        {selectedRoom && (
           <>
+            {/* 일시 */}
             <Section title="일시">
               <div className="flex items-center justify-between rounded-lg bg-[#F7F7F7] px-4 py-3 text-[16px] font-semibold">
                 <span>
-                  {new Date(rooms[0].moimDateTime).toLocaleString("ko-KR", {
+                  {new Date(selectedRoom.moimDateTime).toLocaleString("ko-KR", {
                     month: "long",
                     day: "numeric",
                     hour: "2-digit",
@@ -70,7 +79,7 @@ const Home = () => {
                   })}
                 </span>
                 <span className="text-[#E65F55] font-medium">
-                  {getDDay(rooms[0].moimDateTime)}
+                  {getDDay(selectedRoom.moimDateTime)}
                 </span>
               </div>
             </Section>
@@ -80,10 +89,10 @@ const Home = () => {
               <div className="flex items-center justify-between rounded-lg bg-[#F7F7F7] px-4 py-3">
                 <div>
                   <p className="text-[16px] font-semibold">
-                    {rooms[0].storeTitle}
+                    {selectedRoom.storeTitle}
                   </p>
                   <p className="text-[14px] text-[#6F6F77] truncate">
-                    {rooms[0].location}
+                    {selectedRoom.location}
                   </p>
                 </div>
                 <button className="text-[#6F6F77] text-[14px] font-medium">
@@ -92,17 +101,29 @@ const Home = () => {
               </div>
             </Section>
 
+            {/* 내 모임 정보 */}
             <Section title="내 모임 정보">
               <div className="flex overflow-x-auto gap-[12px]">
-                {rooms.map((room) => (
-                  <RoomCard
+                {rooms!.map((room) => (
+                  <div
                     key={room.id}
-                    title={room.title}
-                    description={room.chatLink} // TODO: 필요하면 storeTitle/설명으로 교체
-                    status={getDDay(room.moimDateTime)}
-                    colorType={mapStatusToColor(room.calRoomStatus)}
-                    rightIcon={null}
-                  />
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setSelectedId(room.id)} // ✅ 클릭 시 선택 갱신
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        setSelectedId(room.id);
+                    }}
+                    className={`cursor-pointer focus:outline-none`}
+                  >
+                    <RoomCard
+                      title={room.title}
+                      description={room.chatLink} // 필요 시 storeTitle/설명으로 교체 가능
+                      status={getDDay(room.moimDateTime)}
+                      colorType={mapStatusToColor(room.calRoomStatus)}
+                      rightIcon={null}
+                    />
+                  </div>
                 ))}
               </div>
             </Section>

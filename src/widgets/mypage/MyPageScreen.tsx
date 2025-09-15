@@ -9,7 +9,10 @@ export default function MyPageScreen() {
   const { data } = useSession();
 
   const name = data?.user?.name ?? "사용자";
-  const userId = (data as any)?.user?.id ?? "123232342343424";
+  // Type assertion to include 'id' property
+  const userId =
+    (data && (data.user as typeof data.user & { id?: string })?.id) ??
+    "123232342343424";
 
   return (
     <div className="mx-auto w-[375px] min-h-screen bg-white flex flex-col">
