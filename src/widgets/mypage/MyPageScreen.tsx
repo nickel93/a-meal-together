@@ -15,7 +15,7 @@ export default function MyPageScreen() {
     "123232342343424";
 
   return (
-    <div className="mx-auto w-[375px] min-h-screen bg-white flex flex-col">
+    <div className="mx-auto w-[375px]  bg-white flex flex-col">
       {/* 타이틀 */}
       <div className="pt-[12px] pb-[8px]">
         <h1 className="text-center text-[16px] font-semibold">마이페이지</h1>
