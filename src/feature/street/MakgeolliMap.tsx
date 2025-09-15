@@ -7,19 +7,19 @@ import { useRouter } from "next/navigation";
 type Shop = {
   id: number;
   name: string;
-  x: string; // 퍼센트 단위
+  x: string;
   y: string;
 };
 
 const shops: Shop[] = [
-  { id: 1, name: "옛촌막걸리", x: "80%", y: "20%" },
-  { id: 2, name: "전주막걸리", x: "70%", y: "35%" },
-  { id: 3, name: "용진집막걸리", x: "72%", y: "45%" },
-  { id: 4, name: "북막걸리", x: "68%", y: "52%" },
-  { id: 5, name: "물레방아막걸리", x: "72%", y: "60%" },
-  { id: 6, name: "곡주마을", x: "65%", y: "70%" },
-  { id: 7, name: "남도집", x: "40%", y: "40%" },
-  { id: 8, name: "두여인생막걸리", x: "35%", y: "55%" },
+  { id: 1, name: "옛촌막걸리", y: "29%", x: "58.1%" },
+  { id: 2, name: "전주막걸리", y: "40.6%", x: "50.7%" },
+  { id: 3, name: "용진집막걸리", y: "45.6%", x: "47.2%" },
+  { id: 4, name: "복막걸리", y: "51%", x: "42.7%" },
+  { id: 5, name: "물레방아막걸리", y: "56.2%", x: "38.9%" },
+  { id: 6, name: "곡주마을", y: "62%", x: "35.2%" },
+  { id: 7, name: "남도집", y: "50.4%", x: "21.1%" },
+  { id: 8, name: "두여인생막걸리", y: "56.2%", x: "4.3%" },
 ];
 
 const MapPin = ({ className = "w-6 h-6 text-[#E65F55]" }) => (
@@ -38,9 +38,8 @@ const MakgeolliMap = () => {
   const router = useRouter();
 
   return (
-    <div className="relative w-full h-full bg-[#F8F6F5]">
-      {/* 지도 */}
-      <div className="relative w-full h-[500px]">
+    <div className="relative w-full h-full bg-[#F8F6F5] overflow-hidden">
+      <div className="relative w-[465px] h-[600px]">
         <Image
           src={dealMap}
           alt="streetmap"

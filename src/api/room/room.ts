@@ -6,7 +6,10 @@ export interface Room {
   title: string;
   createdDate: string;
   chatLink: string;
-  calRoomStatus: "REQUEST" | "CONFIRMED" | "CANCELLED";
+  calRoomStatus: "EMPTY" | "REQUEST" | "CONFIRMED" | "CANCELLED";
+  storeTitle: string;
+  location: string;
+  moimDateTime: string;
 }
 
 export const getRoomList = () => apiRequest<Room[]>(endpoints.room.list);

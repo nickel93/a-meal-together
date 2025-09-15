@@ -12,7 +12,7 @@ const ROOM_CARD_COLORS = {
   GREEN: "#C7FFCA",
 } as const;
 
-interface RoomCardProps {
+export interface RoomCardProps {
   title: string;
   description: string;
   status: string;
