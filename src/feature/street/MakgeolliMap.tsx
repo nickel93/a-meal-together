@@ -49,7 +49,7 @@ const MakgeolliMap = () => {
 
         {/* 전주 막걸리 골목 알아보기 버튼 */}
         <button
-          onClick={() => router.push("/street/detail")}
+          onClick={() => router.push("/streetmap/detail")}
           className="absolute top-[10px] left-[20px] flex items-center gap-1 rounded bg-black/50 px-2 py-1 text-white text-sm"
         >
           전주 막걸리 골목 알아보기
