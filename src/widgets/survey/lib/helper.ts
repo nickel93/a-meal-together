@@ -4,16 +4,15 @@ import { getSurveyDetail } from "@/api/survey/survey";
 
 const mapType = (t: SurveyQuestionTypeAPI): SurveyType => {
   switch (t) {
-    case "SHORT_ANSWER":
-      return "input";
-    case "MULTIPLE_CHOICE_SINGLE":
+    case "SINGLE_CHOICE":
       return "single";
-    case "MULTIPLE_CHOICE_MULTI":
+    case "MULTIPLE_CHOICE":
       return "multi";
     default:
       return "input";
   }
 };
+
 
 export const toSurveyDetail = (
   res: SurveyResponseAPI,
