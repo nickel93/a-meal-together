@@ -25,7 +25,7 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
       role="radio"
       aria-checked={checked}
       onClick={onSelect}
-      className="relative  w-[156px] rounded-lg bg-white flex flex-col items-center justify-end "
+      className="relative w-[156px] rounded-lg bg-white flex flex-col items-center justify-end"
     >
       <div>{icon}</div>
       <p className="mt-2 mb-3 text-[12px] leading-4 font-pretendard font-semibold text-black">
@@ -38,18 +38,33 @@ const DrinkCard = ({ icon, label, checked, onSelect }: DrinkCardProps) => {
   );
 };
 
+// ✅ "2025-09-14T18:20:37.700888" → "9월 14일, 오후 6:20"
+const formatMoimDate = (iso?: string | null) => {
+  if (!iso) return "일정 정보 없음";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "일정 정보 없음";
+
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+  const isPM = d.getHours() >= 12;
+  const hour12 = d.getHours() % 12 || 12;
+  const minute = String(d.getMinutes()).padStart(2, "0");
+  return `${month}월 ${day}일, ${isPM ? "오후" : "오전"} ${hour12}:${minute}`;
+};
+
 const Schedule = () => {
   const [selected, setSelected] = useState<DrinkKey>("2plus");
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const roomId = searchParams.get("id");
-  const roomTitle = searchParams.get("title"); // ✅ query에서 title 가져오기
+  const roomTitle = searchParams.get("title");
+  const moimDateTime = searchParams.get("moimDateTime"); // ✅ ISO 날짜 받기
 
   return (
     <div
       className={twMerge(
-        "mx-auto w-[375px]  bg-white",
+        "mx-auto w-[375px] bg-white",
         "flex flex-col gap-[20px] h-full"
       )}
     >
@@ -58,7 +73,7 @@ const Schedule = () => {
       <ScheduleCard title="일시">
         <div className="h-[54px] rounded-xl border border-[#E4E4E4] bg-[#F7F7F7] px-4 flex items-center justify-between">
           <span className="truncate font-pretendard font-semibold text-[18px] leading-[26px]">
-            {roomTitle ?? "일정 정보 없음"} {/* ✅ title 대체 */}
+            {formatMoimDate(moimDateTime)} {/* ✅ 원하는 포맷 */}
           </span>
           <button
             type="button"
@@ -115,9 +130,11 @@ const Schedule = () => {
               alert("room id가 없습니다.");
               return;
             }
-            const query = `id=${roomId}&title=${encodeURIComponent(
-              roomTitle ?? ""
-            )}&language=ko&count=${selected}&money=100000`; // 임시 보증금
+            const query =
+              `id=${roomId}` +
+              `&title=${encodeURIComponent(roomTitle ?? "")}` +
+              `&moimDateTime=${encodeURIComponent(moimDateTime ?? "")}` + // ✅ 다음 화면에도 전달
+              `&language=ko&count=${selected}&money=100000`;
             router.push(`/join/charging?${query}`);
           }}
         >

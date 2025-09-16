@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { HeaderIcon } from "@/icon";
+
 import {
   Charging,
   JoinHeader,
@@ -8,6 +8,7 @@ import {
   JoinTable,
 } from "@/widgets/join";
 import { Suspense } from "react";
+import { HeaderLogo } from "@/icon";
 
 type Slug = "story" | "schedule" | "table" | "charging";
 
@@ -47,7 +48,7 @@ export default async function Page({
       <div className="gap-[40px] flex flex-col h-full flex-grow px-[20px]">
         {(slug === "table" || slug === "story") && (
           <JoinHeader>
-            <HeaderIcon />
+            <HeaderLogo />
           </JoinHeader>
         )}
         <Component />

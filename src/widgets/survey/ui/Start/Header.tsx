@@ -7,8 +7,9 @@ const SurveyHeader = () => {
         전주 한상을 즐기고 싶나요?
       </p>
       <p className="mt-2 text-[16px] leading-[22px] font-normal text-[#333333]">
-        오직 전주에서 즐기는 특별한 한상! 인연이 될지도 모르는 우연이 기다리고
-        있어요.
+        오직 전주에서 즐기는 특별한 한상!
+        <br />
+        인연이 될지도 모르는 우연이 기다리고 있어요.
       </p>
     </header>
   );

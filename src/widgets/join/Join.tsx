@@ -28,8 +28,9 @@ const JoinTable = () => {
     <div className="flex flex-col items-start h-full flex-grow">
       <h1 className="text-2xl font-bold mb-4">예정된 한상모임</h1>
       <p className="text-[16px] font-normal text-[#333333] mb-6">
-        오직 전주에서 즐기는 특별한 한상! 인연이 될지도 모르는 우연이 기다리고
-        있어요.
+        오직 전주에서 즐기는 특별한 한상!
+        <br />
+        인연이 될지도 모르는 우연이 기다리고 있어요.
       </p>
 
       <div className="flex flex-col gap-4 mb-6 w-full">
@@ -50,7 +51,7 @@ const JoinTable = () => {
             if (selected) {
               const query = `id=${selected.id}&title=${encodeURIComponent(
                 selected.title
-              )}`;
+              )}&moimDateTime=${encodeURIComponent(selected.moimDateTime)}`;
               router.push(`/join/schedule?${query}`);
             } else {
               alert("참석할 모임을 선택해주세요.");

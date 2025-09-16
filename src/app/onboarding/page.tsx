@@ -1,10 +1,10 @@
-import { HeaderIcon } from "@/icon";
+import { HeaderLogo } from "@/icon";
 import { SurveyStart } from "@/widgets/survey";
 
 const Page = () => {
   return (
     <div className="h-full  gap-[40px] flex flex-col px-[20px]">
-      <HeaderIcon />
+      <HeaderLogo />
       <SurveyStart />
     </div>
   );
