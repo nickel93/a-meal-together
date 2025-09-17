@@ -1,13 +1,17 @@
 export const endpoints = {
   healthCheck: "/healthCheck",
+  home: {
+    backdoorSignup: "/backdoor-signup", // ← 일반 회원가입(아이디/비번)
+  },
+
   member: {
     signup: `/api/v1/member/signup`,
     getById: (memberId: number) => `/api/v1/member/${memberId}`,
     myInfo: "/api/v1/member/myInfo",
     backdoorLogin: "/api/backdoor-login",
-    join: "/api/v1/member/join", // 모임 참여
-    leave: (memberId: number) => `/api/v1/member/${memberId}`, // 멤버 탈퇴
-    listByRoom: (roomId: number) => `/api/v1/room/${roomId}/members`, // 특정 방의 멤버 목록
+    join: "/api/v1/member/join",
+    leave: (memberId: number) => `/api/v1/member/${memberId}`,
+    listByRoom: (roomId: number) => `/api/v1/room/${roomId}/members`,
   },
   surveys: {
     submit: (surveyId: number) => `/api/surveys/${surveyId}/submit`,

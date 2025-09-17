@@ -53,3 +53,25 @@ export interface SurveyParticipateRequest {
   userAgent?: string;
   draft?: boolean;
 }
+
+export type SurveyAnswerSubmit = {
+  questionId: number;
+  answerText?: string; // 주관식
+  selectedOptionId?: number; // 단일선택 (id 쓸 때)
+  selectedOptionIds?: number[]; // 다중선택 (id들)
+  ratingValue?: number;
+  selectedOptionText?: string; // 단일선택 (텍스트로 보낼 때)
+  selectedOptionTexts?: string[]; // 다중선택 (텍스트로 보낼 때)
+};
+
+export type SurveySubmitRequest = {
+  surveyId: number;
+  responseId?: number;
+  answers: SurveyAnswerSubmit[];
+  responderName?: string;
+  responderEmail?: string;
+  responderPhone?: string;
+  ipAddress?: string;
+  userAgent?: string;
+  draft?: boolean; // 임시저장 여부
+};

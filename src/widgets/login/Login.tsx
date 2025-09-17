@@ -6,28 +6,28 @@ import Navigator from "@/shared/navigator/Navigator";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { putLogin } from "@/api/member/member";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async () => await putLogin(email, password), // 아이디를 숫자로 변환해서 호출
+    mutationFn: async () => await putLogin(email, password),
     onSuccess: (data) => {
       console.log("로그인 성공", data);
-      //router.push("/onbornding");
+      router.push("/onboarding");
     },
     onError: (error) => {
-      alert(error.message ?? "로그인 실패");
+      alert(error?.message ?? "로그인 실패");
     },
   });
 
-  const handleSubmit = () => {
-    mutate();
-  };
+  const handleSubmit = () => mutate();
 
   return (
-    <div className=" bg-white flex flex-col flex-grow gap-[20px]">
+    <div className="bg-white flex flex-col flex-grow gap-[20px]">
       <Navigator title="아이디로 로그인" />
 
       <LzInput
@@ -47,6 +47,15 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+
+      {/* 회원가입 링크 */}
+      <button
+        type="button"
+        onClick={() => router.push("/signup/local")}
+        className="self-start text-[16px] leading-[22px] text-[#333333] underline"
+      >
+        회원가입
+      </button>
 
       <LzButton
         type="button"
