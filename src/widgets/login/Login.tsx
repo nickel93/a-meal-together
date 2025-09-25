@@ -17,7 +17,7 @@ const Login = () => {
     mutationFn: async () => await putLogin(email, password),
     onSuccess: (data) => {
       console.log("로그인 성공", data);
-      router.push("/onboarding");
+      router.push("/home");
     },
     onError: (error) => {
       alert(error?.message ?? "로그인 실패");
