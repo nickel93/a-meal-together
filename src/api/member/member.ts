@@ -2,7 +2,7 @@ import { apiRequest } from "../client";
 import { endpoints } from "../endpoints";
 import { SignupRequest, SignupResponse } from "./types";
 
-export const getMemberById = (memberId: number) =>
+export const getMemberById = (memberId: string) =>
   apiRequest(endpoints.member.getById(memberId));
 
 export const getMyInfo = () => apiRequest(endpoints.member.myInfo);

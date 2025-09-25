@@ -9,14 +9,23 @@ import {
 } from "@/feature/survey";
 import { useState } from "react";
 import Question from "@/feature/survey/ui/Question";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchSurveyQuestion } from "../../lib/helper";
-import { SurveyResponseAPI } from "@/api/survey/types";
+import {
+  SurveyResponseAPI,
+  SurveySubmitRequest,
+  SurveyAnswerSubmit,
+} from "@/api/survey/types";
+import { submitSurveyAnswers } from "@/api/survey/survey";
+
+interface Draft {
+  selectedIndexes?: number[]; // 0-based
+  inputValue?: string;
+}
 
 const Survey = () => {
-  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
-  const [inputValue, setInputValue] = useState("");
   const [count, setCount] = useState(0);
+  const [drafts, setDrafts] = useState<Record<number, Draft>>({});
 
   const { data } = useQuery<SurveyResponseAPI>({
     queryKey: ["survey", 1],
@@ -25,13 +34,18 @@ const Survey = () => {
     gcTime: Infinity,
   });
 
+  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+    mutationFn: (req: SurveySubmitRequest) =>
+      submitSurveyAnswers(req.surveyId, req),
+  });
+
   if (!data) return null;
 
-  const total = data.data.questions.length;
-  if (count >= total) return <SurveyMatching />;
+  const surveyId = data.data.id ?? 1;
+  const questions = data.data.questions;
+  const total = questions.length;
 
-  const current = data.data.questions[count];
-
+  const current = questions[count];
   const type: "single" | "multi" | "input" =
     current.type === "SINGLE_CHOICE"
       ? "single"
@@ -40,18 +54,84 @@ const Survey = () => {
       : "input";
 
   const options = Array.isArray(current.options) ? current.options : [];
+  const selectedIndexes = drafts[current.id]?.selectedIndexes ?? [];
+  const inputValue = drafts[current.id]?.inputValue ?? "";
 
   const isDisabled =
     type === "input" ? inputValue.trim() === "" : selectedIndexes.length === 0;
 
+  const buildRequest = (): SurveySubmitRequest => {
+    const answers: SurveyAnswerSubmit[] = questions.map((q) => {
+      const qType: "single" | "multi" | "input" =
+        q.type === "SINGLE_CHOICE"
+          ? "single"
+          : q.type === "MULTIPLE_CHOICE"
+          ? "multi"
+          : "input";
+
+      const optList = Array.isArray(q.options) ? q.options : [];
+      const d = drafts[q.id] ?? { selectedIndexes: [], inputValue: "" };
+
+      if (qType === "input") {
+        const text = (d.inputValue ?? "").trim();
+        return {
+          questionId: q.id,
+          answerText: text || "", // 없으면 ""
+          selectedOptionId: q.id || 0, // 없으면 0
+          selectedOptionIds: [], // 없으면 []
+          ratingValue: 0, // 없으면 0
+          selectedOptionText: "", // 없으면 ""
+          selectedOptionTexts: [], // 없으면 []
+        };
+      }
+
+      if (qType === "single") {
+        const idx = (d.selectedIndexes ?? [])[0] ?? -1;
+        const text = idx >= 0 ? optList[idx] ?? "" : ""; // 없으면 ""
+        return {
+          questionId: q.id,
+          answerText: "",
+          selectedOptionId: q.id || 0, // 없으면 0
+          selectedOptionIds: [],
+          ratingValue: 0,
+          selectedOptionText: text,
+          selectedOptionTexts: [],
+        };
+      }
+
+      // multi
+      const pickedIdx = d.selectedIndexes ?? [];
+      const ids = pickedIdx.length ? pickedIdx.map((i) => i + 1) : []; // 없으면 []
+      const texts = pickedIdx.length
+        ? (pickedIdx.map((i) => optList[i]).filter(Boolean) as string[])
+        : [];
+      return {
+        questionId: q.id,
+        answerText: "",
+        selectedOptionId: q.id || 0, // 없으면 0
+        selectedOptionIds: ids,
+        ratingValue: 0,
+        selectedOptionText: "",
+        selectedOptionTexts: texts,
+      };
+    });
+
+    return {
+      surveyId, // 예: 1 (없으면 0도 허용)
+      responseId: 1, // 예시 값. 없으면 0로 유지 가능
+      answers,
+    };
+  };
+
+  // 제출
+
+  if (isSuccess) return <SurveyMatching />;
+  if (count >= total && !isPending) return <SurveyMatching />;
+
   return (
     <div className="flex flex-col flex-grow items-center gap-4 ">
       <SurveySelector
-        onClick={() => {
-          setCount((prev) => (prev === 0 ? 0 : prev - 1));
-          setSelectedIndexes([]);
-          setInputValue("");
-        }}
+        onClick={() => setCount((prev) => (prev === 0 ? 0 : prev - 1))}
         title={current.questionText}
       />
 
@@ -64,25 +144,54 @@ const Survey = () => {
         selectedIndexes={selectedIndexes}
         onSelect={(index) => {
           if (type === "single") {
-            setSelectedIndexes([index]);
+            setDrafts((prev) => ({
+              ...prev,
+              [current.id]: {
+                ...(prev[current.id] ?? {}),
+                selectedIndexes: [index],
+              },
+            }));
           } else {
-            setSelectedIndexes((prev) =>
-              prev.includes(index)
-                ? prev.filter((i) => i !== index)
-                : [...prev, index]
-            );
+            setDrafts((prev) => {
+              const cur = prev[current.id]?.selectedIndexes ?? [];
+              const next = cur.includes(index)
+                ? cur.filter((i) => i !== index)
+                : [...cur, index];
+              return {
+                ...prev,
+                [current.id]: {
+                  ...(prev[current.id] ?? {}),
+                  selectedIndexes: next,
+                },
+              };
+            });
           }
         }}
-        onInputChange={(val: string) => setInputValue(val)}
+        onInputChange={(val: string) =>
+          setDrafts((prev) => ({
+            ...prev,
+            [current.id]: { ...(prev[current.id] ?? {}), inputValue: val },
+          }))
+        }
         inputValue={inputValue}
         inputPlaceholder="자유 입력"
       />
 
+      {isError && (
+        <p className="text-sm text-red-500">
+          제출에 실패했어요.{" "}
+          {error instanceof Error ? error.message : "다시 시도해 주세요."}
+        </p>
+      )}
+
       <SurveyButton
-        disabled={isDisabled}
+        disabled={isDisabled || isPending}
         onClick={() => {
-          setSelectedIndexes([]);
-          setInputValue("");
+          const isLast = count === total - 1;
+          if (isLast) {
+            mutate(buildRequest()); // ✅ 한 객체로 전달 → mutationFn 내부에서 (id, body)로 래핑 호출
+            return;
+          }
           setCount((prev) => prev + 1);
         }}
       />

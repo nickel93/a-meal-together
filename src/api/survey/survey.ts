@@ -1,17 +1,31 @@
 // src/api/crud/surveys.ts
 import { apiRequest } from "../client";
 import { endpoints } from "../endpoints";
-import { SurveyParticipateRequest, SurveyResponseAPI } from "./types";
+import {
+  SurveyParticipateRequest,
+  SurveyResponseAPI,
+  SurveySubmitRequest,
+} from "./types";
 
 /** 설문 제출 */
-export const submitSurvey = (
+// export const submitSurvey = (
+//   surveyId: number,
+//   data: SurveyParticipateRequest
+// ) =>
+//   apiRequest<SurveyResponseAPI>(endpoints.surveys.submit(surveyId), {
+//     method: "POST",
+//     body: JSON.stringify(data),
+//   });
+
+export async function submitSurveyAnswers(
   surveyId: number,
-  body: SurveyParticipateRequest
-) =>
-  apiRequest<SurveyResponseAPI>(endpoints.surveys.submit(surveyId), {
+  body: SurveySubmitRequest
+): Promise<SurveyResponseAPI> {
+  return apiRequest<SurveyResponseAPI>(endpoints.surveys.submit(surveyId), {
     method: "POST",
     body: JSON.stringify(body),
   });
+}
 
 /** 임시 저장 */
 export const saveSurveyDraft = (data: SurveyParticipateRequest) =>

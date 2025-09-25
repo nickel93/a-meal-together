@@ -1,6 +1,5 @@
-// src/types/survey.api.ts
+// src/types/survey.api.ts  (경로는 네 프로젝트에 맞게)
 export type SurveyStatus = "DRAFT" | "PUBLISHED" | "CLOSED";
-
 export type SurveyQuestionTypeAPI =
   | "SHORT_ANSWER"
   | "MULTIPLE_CHOICE"
@@ -32,10 +31,11 @@ export interface SurveyResponseAPI {
   timestamp: string;
 }
 
+/** 기존 Participate(Answer[]) 타입은 그대로 두고 — 다른 API가 쓰면 유지 */
 export type AnswerValue =
   | { type: "SHORT_ANSWER"; value: string }
-  | { type: "MULTIPLE_CHOICE_SINGLE"; value: string } // 선택지 value
-  | { type: "MULTIPLE_CHOICE_MULTI"; value: string[] }; // 다중 선택
+  | { type: "MULTIPLE_CHOICE_SINGLE"; value: string }
+  | { type: "MULTIPLE_CHOICE_MULTI"; value: string[] };
 
 export interface Answer {
   questionId: number;
@@ -54,24 +54,26 @@ export interface SurveyParticipateRequest {
   draft?: boolean;
 }
 
+/** ✅ 네가 요구한 key/value 구조 */
 export type SurveyAnswerSubmit = {
   questionId: number;
-  answerText?: string; // 주관식
-  selectedOptionId?: number; // 단일선택 (id 쓸 때)
-  selectedOptionIds?: number[]; // 다중선택 (id들)
-  ratingValue?: number;
-  selectedOptionText?: string; // 단일선택 (텍스트로 보낼 때)
-  selectedOptionTexts?: string[]; // 다중선택 (텍스트로 보낼 때)
+  answerText: string | null;
+  selectedOptionId: number | null;
+  selectedOptionIds: number[] | null;
+  ratingValue: number | null;
+  selectedOptionText: string | null;
+  selectedOptionTexts: string[] | null;
 };
 
 export type SurveySubmitRequest = {
   surveyId: number;
   responseId?: number;
   answers: SurveyAnswerSubmit[];
+  // 메타 필드 optional — 안 넣으면 JSON에 포함 안 됨
   responderName?: string;
   responderEmail?: string;
   responderPhone?: string;
   ipAddress?: string;
   userAgent?: string;
-  draft?: boolean; // 임시저장 여부
+  draft?: boolean;
 };

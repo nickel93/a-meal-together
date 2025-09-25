@@ -6,7 +6,8 @@ export const endpoints = {
 
   member: {
     signup: `/api/v1/member/signup`,
-    getById: (memberId: number) => `/api/v1/member/${memberId}`,
+    getById: (memberId: string) =>
+      `/api/v1/member?memberId=${encodeURIComponent(memberId)}`,
     myInfo: "/api/v1/member/myInfo",
     backdoorLogin: "/api/backdoor-login",
     join: "/api/v1/member/join",
