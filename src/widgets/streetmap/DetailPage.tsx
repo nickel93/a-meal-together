@@ -1,9 +1,30 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import ex from "./ex.png";
 import Navigator from "@/shared/navigator/Navigator";
+import { fetchDetailCommon2, fetchDetailImage2 } from "@/api/tourapi/tourapi";
+
+// ✅ 필요: NEXT_PUBLIC_TOUR_API_KEY=.env.local 에 설정
+
+const CONTENT_ID = 3056499; // 전주 삼천2동 막걸리골목
 
 const DetailPage = () => {
+  useEffect(() => {
+    const run = async () => {
+      try {
+        const common = await fetchDetailCommon2(CONTENT_ID);
+        console.log("[detailCommon2]", common);
+
+        const images = await fetchDetailImage2(CONTENT_ID, 1, 30);
+        console.log("[detailImage2]", images);
+      } catch (err) {
+        console.error("[TourAPI Error]", err);
+      }
+    };
+    run();
+  }, []);
+
   return (
     <div className="flex flex-col w-full h-full bg-white">
       {/* 헤더 */}
