@@ -14,7 +14,7 @@ import { fetchSurveyQuestion } from "../../lib/helper";
 import {
   SurveyResponseAPI,
   SurveySubmitRequest,
-  SurveyAnswerSubmit,
+  //SurveyAnswerSubmit,
 } from "@/api/survey/types";
 import { submitSurveyAnswers } from "@/api/survey/survey";
 
@@ -26,6 +26,7 @@ interface Draft {
 const Survey = () => {
   const [count, setCount] = useState(0);
   const [drafts, setDrafts] = useState<Record<number, Draft>>({});
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const { data } = useQuery<SurveyResponseAPI>({
     queryKey: ["survey", 1],
@@ -34,14 +35,14 @@ const Survey = () => {
     gcTime: Infinity,
   });
 
-  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+  const { isError, error } = useMutation({
     mutationFn: (req: SurveySubmitRequest) =>
       submitSurveyAnswers(req.surveyId, req),
   });
 
   if (!data) return null;
 
-  const surveyId = data.data.id ?? 1;
+  //const surveyId = data.data.id ?? 1;
   const questions = data.data.questions;
   const total = questions.length;
 
@@ -60,73 +61,73 @@ const Survey = () => {
   const isDisabled =
     type === "input" ? inputValue.trim() === "" : selectedIndexes.length === 0;
 
-  const buildRequest = (): SurveySubmitRequest => {
-    const answers: SurveyAnswerSubmit[] = questions.map((q) => {
-      const qType: "single" | "multi" | "input" =
-        q.type === "SINGLE_CHOICE"
-          ? "single"
-          : q.type === "MULTIPLE_CHOICE"
-          ? "multi"
-          : "input";
+  // const buildRequest = (): SurveySubmitRequest => {
+  //   const answers: SurveyAnswerSubmit[] = questions.map((q) => {
+  //     const qType: "single" | "multi" | "input" =
+  //       q.type === "SINGLE_CHOICE"
+  //         ? "single"
+  //         : q.type === "MULTIPLE_CHOICE"
+  //         ? "multi"
+  //         : "input";
 
-      const optList = Array.isArray(q.options) ? q.options : [];
-      const d = drafts[q.id] ?? { selectedIndexes: [], inputValue: "" };
+  //     const optList = Array.isArray(q.options) ? q.options : [];
+  //     const d = drafts[q.id] ?? { selectedIndexes: [], inputValue: "" };
 
-      if (qType === "input") {
-        const text = (d.inputValue ?? "").trim();
-        return {
-          questionId: q.id,
-          answerText: text || "", // 없으면 ""
-          selectedOptionId: q.id || 0, // 없으면 0
-          selectedOptionIds: [], // 없으면 []
-          ratingValue: 0, // 없으면 0
-          selectedOptionText: "", // 없으면 ""
-          selectedOptionTexts: [], // 없으면 []
-        };
-      }
+  //     if (qType === "input") {
+  //       const text = (d.inputValue ?? "").trim();
+  //       return {
+  //         questionId: q.id,
+  //         answerText: text || "", // 없으면 ""
+  //         selectedOptionId: q.id || 0, // 없으면 0
+  //         selectedOptionIds: [], // 없으면 []
+  //         ratingValue: 0, // 없으면 0
+  //         selectedOptionText: "", // 없으면 ""
+  //         selectedOptionTexts: [], // 없으면 []
+  //       };
+  //     }
 
-      if (qType === "single") {
-        const idx = (d.selectedIndexes ?? [])[0] ?? -1;
-        const text = idx >= 0 ? optList[idx] ?? "" : ""; // 없으면 ""
-        return {
-          questionId: q.id,
-          answerText: "",
-          selectedOptionId: q.id || 0, // 없으면 0
-          selectedOptionIds: [],
-          ratingValue: 0,
-          selectedOptionText: text,
-          selectedOptionTexts: [],
-        };
-      }
+  //     if (qType === "single") {
+  //       const idx = (d.selectedIndexes ?? [])[0] ?? -1;
+  //       const id1 = idx >= 0 ? idx + 1 : 0; // 없으면 0
+  //       const text = idx >= 0 ? optList[idx] ?? "" : ""; // 없으면 ""
+  //       return {
+  //         questionId: q.id,
+  //         answerText: "",
+  //         selectedOptionId: q.id || 0, // 없으면 0
+  //         selectedOptionIds: [],
+  //         ratingValue: 0,
+  //         selectedOptionText: text,
+  //         selectedOptionTexts: [],
+  //       };
+  //     }
 
-      // multi
-      const pickedIdx = d.selectedIndexes ?? [];
-      const ids = pickedIdx.length ? pickedIdx.map((i) => i + 1) : []; // 없으면 []
-      const texts = pickedIdx.length
-        ? (pickedIdx.map((i) => optList[i]).filter(Boolean) as string[])
-        : [];
-      return {
-        questionId: q.id,
-        answerText: "",
-        selectedOptionId: q.id || 0, // 없으면 0
-        selectedOptionIds: ids,
-        ratingValue: 0,
-        selectedOptionText: "",
-        selectedOptionTexts: texts,
-      };
-    });
+  //     // multi
+  //     const pickedIdx = d.selectedIndexes ?? [];
+  //     const ids = pickedIdx.length ? pickedIdx.map((i) => i + 1) : []; // 없으면 []
+  //     const texts = pickedIdx.length
+  //       ? (pickedIdx.map((i) => optList[i]).filter(Boolean) as string[])
+  //       : [];
+  //     return {
+  //       questionId: q.id,
+  //       answerText: "",
+  //       selectedOptionId: 0,
+  //       selectedOptionIds: ids,
+  //       ratingValue: 0,
+  //       selectedOptionText: "",
+  //       selectedOptionTexts: texts,
+  //     };
+  //   });
 
-    return {
-      surveyId, // 예: 1 (없으면 0도 허용)
-      responseId: 1, // 예시 값. 없으면 0로 유지 가능
-      answers,
-    };
-  };
+  //   return {
+  //     surveyId, // 예: 1 (없으면 0도 허용)
+  //     responseId: 1, // 예시 값. 없으면 0로 유지 가능
+  //     answers,
+  //   };
+  // };
 
   // 제출
 
   if (isSuccess) return <SurveyMatching />;
-  if (count >= total && !isPending) return <SurveyMatching />;
 
   return (
     <div className="flex flex-col flex-grow items-center gap-4 ">
@@ -185,11 +186,11 @@ const Survey = () => {
       )}
 
       <SurveyButton
-        disabled={isDisabled || isPending}
+        disabled={isDisabled}
         onClick={() => {
           const isLast = count === total - 1;
           if (isLast) {
-            mutate(buildRequest()); // ✅ 한 객체로 전달 → mutationFn 내부에서 (id, body)로 래핑 호출
+            setIsSuccess(true); // 제출 성공 상태로 변경
             return;
           }
           setCount((prev) => prev + 1);
