@@ -17,7 +17,8 @@ export async function fetchDetailCommon2(contentId: number | string) {
     MobileApp: "test",
     _type: "json",
     contentId,
-    serviceKey: SERVICE_KEY,
+    serviceKey:
+      "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
   })}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -39,7 +40,8 @@ export async function fetchDetailImage2(
     numOfRows,
     imageYN: "Y",
     subImageYN: "Y",
-    serviceKey: SERVICE_KEY,
+    serviceKey:
+      "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
   })}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
