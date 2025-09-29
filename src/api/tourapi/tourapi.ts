@@ -1,6 +1,6 @@
 // api/tour.ts
 const BASE = "https://apis.data.go.kr/B551011/KorService2";
-const SERVICE_KEY = process.env.NEXT_PUBLIC_TOUR_API_KEY || ""; // 테스트용
+const SERVICE_KEY = process.env.TOUR_API_KEY || ""; // 테스트용
 
 const qs = (obj: Record<string, string | number | undefined>) =>
   new URLSearchParams(
