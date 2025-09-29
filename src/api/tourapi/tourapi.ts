@@ -20,7 +20,11 @@ export async function fetchDetailCommon2(contentId: number | string) {
     serviceKey:
       "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
   })}`;
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json(); // 원본 JSON 그대로 반환
 }
@@ -43,7 +47,11 @@ export async function fetchDetailImage2(
     serviceKey:
       "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
   })}`;
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json(); // 원본 JSON 그대로 반환
 }
