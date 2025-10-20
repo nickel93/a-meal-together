@@ -180,7 +180,7 @@ const Survey = () => {
 
       {isError && (
         <p className="text-sm text-red-500">
-          제출에 실패했어요.{" "}
+          제출에 실패했어요.
           {error instanceof Error ? error.message : "다시 시도해 주세요."}
         </p>
       )}

@@ -9,11 +9,11 @@ const qs = (obj: Record<string, string | number | undefined>) =>
       return a;
     }, {} as Record<string, string>)
   ).toString();
-
+//https://apis.data.go.kr/B551011/KorService2/detailCommon2?MobileOS=web&MobileApp=test&contentId=3056499&serviceKey=2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D
 /** 막걸리골목 설명(detailCommon2) */
 export async function fetchDetailCommon2(contentId: number | string) {
   const url = `${BASE}/detailCommon2?${qs({
-    MobileOS: "WEB",
+    MobileOS: "web",
     MobileApp: "test",
     _type: "json",
     contentId,
