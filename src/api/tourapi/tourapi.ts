@@ -12,46 +12,29 @@ const qs = (obj: Record<string, string | number | undefined>) =>
 //https://apis.data.go.kr/B551011/KorService2/detailCommon2?MobileOS=web&MobileApp=test&contentId=3056499&serviceKey=2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D
 /** 막걸리골목 설명(detailCommon2) */
 export async function fetchDetailCommon2(contentId: number | string) {
-  const url = `${BASE}/detailCommon2?${qs({
-    MobileOS: "web",
-    MobileApp: "test",
-    _type: "json",
-    contentId,
-    serviceKey:
-      "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
-  })}`;
-  const res = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const url = `/api/tour/detail?contentId=${contentId}`;
+  const res = await fetch(url); // 불필요한 Content-Type 헤더 제거
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json(); // 원본 JSON 그대로 반환
+  return res.json();
 }
 
 /** 막걸리골목 이미지(detailImage2) */
 export async function fetchDetailImage2(
   contentId: number | string,
-  pageNo: number = 1,
-  numOfRows: number = 30
+  pageNo = 1,
+  numOfRows = 30
 ) {
-  const url = `${BASE}/detailImage2?${qs({
+  const qs = new URLSearchParams({
     MobileOS: "WEB",
     MobileApp: "test",
     _type: "json",
-    contentId,
-    pageNo,
-    numOfRows,
-    imageYN: "Y",
-    subImageYN: "Y",
-    serviceKey:
-      "2adkNE6zwTXqrRnQ0nL3iEJgi%2FhGOPRrNzVyxmVsZ59EIygfsGJvx7Ow%2FsU%2F3zgDeJjWHEAJRsTD%2Bo7JHCUUgg%3D%3D",
-  })}`;
-  const res = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+    contentId: String(contentId),
+    pageNo: String(pageNo),
+    numOfRows: String(numOfRows),
+  }).toString();
+
+  const url = `${BASE}/detailImage2?${qs}&serviceKey=${process.env.TOUR_API_KEY}`; // 키는 문자열로 그대로
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json(); // 원본 JSON 그대로 반환
+  return res.json();
 }
