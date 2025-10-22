@@ -1,8 +1,9 @@
 // src/api/tourapi/queries.ts
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { fetchDetailImage2 } from "./tourapi";
+import { fetchDetailCommon2, fetchDetailImage2 } from "./tourapi";
 
 export const tourKeys = {
+  detailCommon: (id: number | string) => ["tour", "detailCommon2", id] as const,
   detailImage: (id: number | string, page: number, size: number) =>
     ["tour", "detailImage2", id, page, size] as const,
 };
@@ -41,5 +42,15 @@ export const prefetchDetailImage = async (
   await qc.prefetchQuery({
     queryKey: tourKeys.detailImage(contentId, page, size),
     queryFn: () => fetchDetailImage2(contentId, page, size),
+  });
+};
+
+export const prefetchDetailCommon = async (
+  qc: QueryClient,
+  contentId: number | string
+) => {
+  await qc.prefetchQuery({
+    queryKey: tourKeys.detailCommon(contentId),
+    queryFn: () => fetchDetailCommon2(contentId),
   });
 };
